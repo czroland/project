@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+
+    <context:component-scan base-package="hu.inf.unideb.rft.ejournal.persistence"/>
+    <jee:jndi-lookup jndi-name="java:jboss/datasources/Ejournal" id="dataSource"
+                     expected-type="javax.sql.DataSource"/>
+
+    <!-- Look up the container deployed EntityManager -->
+    <jee:jndi-lookup jndi-name="java:/EntityManager"
+                     id="entityManager" expected-type="javax.persistence.EntityManager"/>
+
+    <jee:jndi-lookup jndi-name="java:/EntityManagerFactory"
+                     id="entityManagerFactory" expected-type="javax.persistence.EntityManagerFactory"/>
+
+    <!-- Use JTA transactions with the container-deployed EntityManager -->
+    <tx:jta-transaction-manager/>
+
+    <!-- Use declarative transactions on the services -->
+    <tx:annotation-driven/>
+
+    <jpa:repositories base-package="hu.inf.unideb.rft.ejournal.persistence"/>
+
+    <bean class="org.springframework.data.jpa.repository.support.DefaultJpaContext">
+        <constructor-arg>
+            <set>
+                <ref bean="entityManager"/>
+            </set>
+        </constructor-arg>
+    </bean>
+</beans>
