@@ -45,8 +45,3 @@ public class User extends BaseEntity {
         this.password = password;
     }
 }
-
-
-
-
-
