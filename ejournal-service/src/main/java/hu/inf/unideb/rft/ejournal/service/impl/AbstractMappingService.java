@@ -16,7 +16,7 @@ public abstract class AbstractMappingService implements Mapper {
     }
 
     public <T, U> List<U> map(List<T> var1, Class<U> var2) {
-        List<U> vos = new ArrayList<>();
+        List<U> vos = new ArrayList<>(var1.size());
         for (T element : var1) {
             vos.add(getMapper().map(element, var2));
         }
