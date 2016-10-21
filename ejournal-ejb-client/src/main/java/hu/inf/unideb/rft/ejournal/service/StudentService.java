@@ -7,13 +7,15 @@ import java.util.List;
 
 public interface StudentService {
 
-    void saveUser(StudentVo studentVo);
+    void saveStudent(StudentVo studentVo);
 
     List<StudentVo> getAllUsers();
 
     StudentVo getStudentById(Long id);
 
-    StudentVo getStudentByName(String name);
+    StudentVo getStudentByUserId(Long id);
+
+    List<StudentVo> getStudentsByClassId(Long id);
 
     StudentVo getStudentByEmail(String email);
 

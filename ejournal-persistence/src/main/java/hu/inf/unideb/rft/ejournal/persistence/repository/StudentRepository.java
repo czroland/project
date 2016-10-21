@@ -4,14 +4,13 @@ package hu.inf.unideb.rft.ejournal.persistence.repository;
 import hu.inf.unideb.rft.ejournal.persistence.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Student findById(Long id);
 
-    Student findByName(String name);
+    Student findByUserId(Long id);
 
-    Student findByEmail(String email);
-
-    Student findByPhonenumber(Number Phonenumber);
-
+    List<Student> findByClassId(Long id);
 }

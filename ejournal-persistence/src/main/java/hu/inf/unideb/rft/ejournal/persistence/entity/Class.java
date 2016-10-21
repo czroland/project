@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "classes")
 public class Class extends BaseEntity {
 
-    String year;
+    private String year;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "teacher_id")
