@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+
+<h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-theme.min.css"/>
+    <h:outputStylesheet library="css" name="theme.css"/>
+    <title><ui:insert name="title"/></title>
+</h:head>
+
+<h:body>
+
+    <header class="container-fluid header">
+        <div class="row">
+            <div class="col-xs-12 col-sm-1 col-md-1">
+                <h:outputLink value="/../ejournal/index.xhtml">
+                    <h:graphicImage library="images" name="logo.png" style="width: 100px" class="img-responsive"/>
+                </h:outputLink>
+            </div>
+            <div class="col-xs-12 col-sm-11 col-md-7">
+                <h6 class="welcome-text">#{msg['welcome']}</h6>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem value="#{msg['teacher']}" url="/../" icon="fa fa-pencil"/>
+                        <p:menuitem value="#{msg['student']}" url="/../" icon="fa fa-book"/>
+                        <p:menuitem value="#{msg['parent']}" url="/../" icon="fa fa-users"/>
+                        <p:menuitem value="Admin" url="/../" icon="fa fa-lock"/>
+                    </p:menubar>
+                </h:form>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <h:form>
+            <p:breadCrumb>
+                <ui:insert name="breadCrumb">
+                    <p:menuitem value="Categories" url="/../ejournal/index.xhtml"/>
+                </ui:insert>
+            </p:breadCrumb>
+        </h:form>
+    </nav>
+
+    <section id="main-content" class="main-content">
+        <ui:insert name="body"/>
+    </section>
+
+    <footer>
+        <span>© 2016 E-journal</span>
+    </footer>
+</h:body>
+</html>
