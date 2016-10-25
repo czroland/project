@@ -1,6 +1,5 @@
 package hu.inf.unideb.rft.ejournal.persistence.entity;
 
-
 import javax.persistence.*;
 
 @Entity
