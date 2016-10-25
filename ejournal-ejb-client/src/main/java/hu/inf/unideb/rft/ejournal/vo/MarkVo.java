@@ -1,22 +1,21 @@
 package hu.inf.unideb.rft.ejournal.vo;
 
-
 import java.io.Serializable;
 
-public class TeacherVo implements Serializable {
+public class MarkVo implements Serializable{
 
     private static final long serialVersionUID = 5494350187711576327L;
 
+    private StudentVo student;
+
     private Long id;
 
-    private UserVo user;
-
-    public UserVo getUser() {
-        return user;
+    public StudentVo getStudent() {
+        return student;
     }
 
-    public void setUser(UserVo user) {
-        this.user = user;
+    public void setStudent(StudentVo student) {
+        this.student = student;
     }
 
     public Long getId() {
