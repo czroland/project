@@ -11,6 +11,8 @@ public class TeacherVo implements Serializable {
 
     private UserVo user;
 
+    private SubjectVo subject;
+
     public UserVo getUser() {
         return user;
     }
@@ -26,4 +28,13 @@ public class TeacherVo implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public SubjectVo getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectVo subject) {
+        this.subject = subject;
+    }
+
 }

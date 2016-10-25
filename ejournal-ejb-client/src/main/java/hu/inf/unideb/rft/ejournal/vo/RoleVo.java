@@ -6,11 +6,11 @@ import java.util.List;
 
 public class RoleVo implements Serializable {
 
+    private static final long serialVersionUID = -446040323171528192L;
+
     private Long id;
 
     private String name;
-
-    private List<ArrayList> permissions;
 
     public Long getId() {
         return id;
@@ -28,11 +28,4 @@ public class RoleVo implements Serializable {
         this.name = name;
     }
 
-    public List<ArrayList> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<ArrayList> permissions) {
-        this.permissions = permissions;
-    }
 }

@@ -14,15 +14,19 @@ public class Teacher extends BaseEntity {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "class_id")
-    private Class aClass;
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 }

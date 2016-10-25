@@ -7,8 +7,6 @@ public class UserVo implements Serializable {
 
     private static final long serialVersionUID = 4856219201746281938L;
 
-    private RoleVo role;
-
     private Long id;
 
     private String name;
@@ -16,14 +14,6 @@ public class UserVo implements Serializable {
     private String email;
 
     private String password;
-
-    public RoleVo getRole() {
-        return role;
-    }
-
-    public void setRole(RoleVo role) {
-        this.role = role;
-    }
 
     public Long getId() {
         return id;

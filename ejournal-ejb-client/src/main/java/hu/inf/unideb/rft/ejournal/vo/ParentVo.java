@@ -5,13 +5,11 @@ import java.io.Serializable;
 
 public class ParentVo implements Serializable {
 
-    private static final long serialVersionUID = 584194276884030404L;
+    private static final long serialVersionUID = -6274509843615715616L;
 
     private Long id;
 
     private UserVo user;
-
-    private Long studentId;
 
     public Long getId() {
         return id;
@@ -28,8 +26,4 @@ public class ParentVo implements Serializable {
     public void setUser(UserVo user) {
         this.user = user;
     }
-
-    public Long getStudentId() { return studentId; }
-
-    public void setStudentId(Long studentId) { this.studentId = studentId; }
 }

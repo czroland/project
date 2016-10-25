@@ -6,9 +6,13 @@ public class MarkVo implements Serializable{
 
     private static final long serialVersionUID = 5494350187711576327L;
 
+    private Long id;
+
     private StudentVo student;
 
-    private Long id;
+    private SubjectVo subject;
+
+    private TeacherVo teacher;
 
     public StudentVo getStudent() {
         return student;
@@ -24,5 +28,21 @@ public class MarkVo implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public SubjectVo getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectVo subject) {
+        this.subject = subject;
+    }
+
+    public TeacherVo getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeacherVo teacher) {
+        this.teacher = teacher;
     }
 }

@@ -12,6 +12,10 @@ public class Student extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parent_id")
+    private Parent parent;
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "class_id")
     private Class aclass;
@@ -30,5 +34,13 @@ public class Student extends BaseEntity {
 
     public void setAclass(Class aclass) {
         this.aclass = aclass;
+    }
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 }

@@ -10,8 +10,6 @@ public class SubjectVo implements Serializable{
 
     private String name;
 
-    private TeacherVo teacher;
-
     public Long getId() {
         return id;
     }
@@ -28,11 +26,4 @@ public class SubjectVo implements Serializable{
         this.name = name;
     }
 
-    public TeacherVo getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(TeacherVo teacher) {
-        this.teacher = teacher;
-    }
 }
