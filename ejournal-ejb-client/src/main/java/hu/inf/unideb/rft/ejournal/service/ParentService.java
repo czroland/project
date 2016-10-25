@@ -5,7 +5,7 @@ import hu.inf.unideb.rft.ejournal.vo.ParentVo;
 import java.util.List;
 
 public interface ParentService {
-    void saveUser(ParentVo parentVo);
+    void saveParent(ParentVo parentVo);
 
     List<ParentVo> getAllUsers();
 

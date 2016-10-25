@@ -7,7 +7,7 @@ public interface RoleService {
 
     void saveRole(RoleVo roleVo);
 
-    RoleVo getRolebyId(Long id);
+    RoleVo getRoleById(Long id);
 
-    RoleVo getRolebyName(String name);
+    RoleVo getRoleByName(String name);
 }
