@@ -8,6 +8,11 @@
 
     <display-name>E-journal</display-name>
 
+    <!-- ContextLoaderListener to load Spring configurations -->
+   <!-- <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>-->
+
     <!-- Change to "Production" when you are ready to deploy -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
@@ -16,6 +21,10 @@
     <context-param>
         <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
         <param-value>0</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring-context.xml</param-value>
     </context-param>
 
     <!-- To change PrimeFaces theme -->
@@ -63,5 +72,34 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+
+    <!-- Spring Security -->
+    <!--<filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>-->
+
+    <ejb-local-ref>
+        <ejb-ref-name>ejb.StudentService</ejb-ref-name>
+        <local>hu.inf.unideb.rft.ejournal.service.StudentService</local>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb.ClassService</ejb-ref-name>
+        <local>hu.inf.unideb.rft.ejournal.service.ClassService</local>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb.MarkService</ejb-ref-name>
+        <local>hu.inf.unideb.rft.ejournal.service.MarkService</local>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb.ParentService</ejb-ref-name>
+        <local>hu.inf.unideb.rft.ejournal.service.ParentService</local>
+    </ejb-local-ref>
 
 </web-app>
