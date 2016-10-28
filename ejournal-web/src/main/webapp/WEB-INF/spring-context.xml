@@ -14,7 +14,9 @@
 
     <import resource="spring-security.xml"/>
     <jee:local-slsb id="UserService"
-                    jndi-name="java:global/ejournal-ear/ejournal-service/UserService!hu.inf.unideb.rft.ejournal.clirnt.api.service.UserService"
-                    business-interface="hu.inf.unideb.rft.ejournal.service.UserService" />
-
+                    jndi-name="java:global/ejournal-ear/ejournal-service/UserService!hu.inf.unideb.rft.ejournal.service.UserService"
+                    business-interface="hu.inf.unideb.rft.ejournal.service.UserService"/>
+    <jee:local-slsb id="RoleService"
+                    jndi-name="java:global/ejournal-ear/ejournal-service/RoleService!hu.inf.unideb.rft.ejournal.service.RoleService"
+                    business-interface="hu.inf.unideb.rft.ejournal.service.RoleService"/>
 </beans>

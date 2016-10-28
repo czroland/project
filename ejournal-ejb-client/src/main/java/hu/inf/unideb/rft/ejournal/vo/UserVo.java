@@ -2,6 +2,8 @@ package hu.inf.unideb.rft.ejournal.vo;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserVo implements Serializable {
 
@@ -14,6 +16,12 @@ public class UserVo implements Serializable {
     private String email;
 
     private String password;
+
+    private List<RoleVo> roles;
+
+    public UserVo(List<RoleVo> roles) {
+        this.roles = new ArrayList<>() ;
+    }
 
     public Long getId() {
         return id;
@@ -47,5 +55,11 @@ public class UserVo implements Serializable {
         this.password = password;
     }
 
+    public List<RoleVo> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(List<RoleVo> roles) {
+        this.roles = roles;
+    }
 }

@@ -9,9 +9,9 @@
     <display-name>E-journal</display-name>
 
     <!-- ContextLoaderListener to load Spring configurations -->
-   <!-- <listener>
+    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>-->
+    </listener>
 
     <!-- Change to "Production" when you are ready to deploy -->
     <context-param>
@@ -22,6 +22,12 @@
         <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
         <param-value>0</param-value>
     </context-param>
+
+    <!-- Welcome page -->
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring-context.xml</param-value>
@@ -38,11 +44,6 @@
         <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>
     </context-param>
-
-    <!-- Welcome page -->
-    <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
-    </welcome-file-list>
 
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
@@ -74,16 +75,15 @@
     </servlet-mapping>
 
     <!-- Spring Security -->
-    <!--<filter>
+    <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>-->
+    </filter-mapping>
+
 
     <ejb-local-ref>
         <ejb-ref-name>ejb.StudentService</ejb-ref-name>

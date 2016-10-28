@@ -16,8 +16,4 @@
         <constructor-arg value="classpath:spring-core.xml"/>
     </bean>
 
-    <context:property-placeholder properties-ref="myProperties"/>
-    <bean id="myProperties"
-          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-    </bean>
 </beans>
