@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:form id="login-form" prependId="false">
+        <p:messages showSummary="true" showDetail="false"/>
+
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel for="username" value="#{msg['login.name']}"/>
+            <p:inputText id="username" value="" required="true"
+                         requiredMessage="#{msg['login.name.req']}"/>
+
+            <p:outputLabel for="password" value="#{msg['login.psw']}"/>
+            <p:password id="password" value="" required="true"
+                        requiredMessage="#{msg['login.psw.req']}"/>
+
+        </p:panelGrid>
+            <h:commandButton type="submit" id="login-button" value="#{msg['login']}"/>
+            <ui:param name="logged-in" value=""/>
+
+    </h:form>
+</ui:composition>

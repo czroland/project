@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:outputLabel value="#{msg['login.title']}" styleClass="label label-info"/>
+    <p:separator/>
+
+    <p:outputLabel value="#{msg['login.error']}" rendered="#{param['error'] == true}"
+                   styleClass="label label-danger"/>
+    <p:separator rendered="#{param['error'] == true}"/>
+
+    <div>
+        <p:outputLabel value="#{msg['login.not.registered']}&#160;"/>
+    </div>
+    <div>
+        <p:link href="/../ejournal/registration.xhtml" value="#{msg['login.register.here']}"/>
+    </div>
+    <p:separator/>
+
+</ui:composition>

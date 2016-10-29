@@ -17,7 +17,6 @@ h6.welcome-text {
     font-size: 2.0em;
 }
 
-
 footer {
     max-height: 52px;
     position: absolute;
@@ -30,4 +29,14 @@ footer {
 
 footer span {
     margin-right: 20px;
+}
+
+.panel-center {
+    margin: 0 auto;
+    alignment: center;
+    text-align: center;
+}
+
+.panel-paddin {
+    padding: 2px 5px ;
 }

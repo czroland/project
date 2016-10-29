@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:form id="registration-form">
+        <p:messages showSummary="true" showDetail="false"/>
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel for="uname" value="#{msg['reg.uname']}"/>
+            <p:inputText id="uname" value="" required="true"
+                         requiredMessage="#{msg['reg.uname.req']}"/>
+
+            <p:outputLabel for="fname" value="#{msg['reg.fname']}"/>
+            <p:inputText id="fname" value="" required="true"
+                         requiredMessage="#{msg['reg.fname.req']}"/>
+
+            <p:outputLabel for="lname" value="#{msg['reg.lname']}"/>
+            <p:inputText id="lname" value="" required="true"
+                         requiredMessage="#{msg['reg.lname.req']}"/>
+
+            <p:outputLabel for="email" value="#{msg['reg.email']}"/>
+            <p:inputText id="email" value="" required="true"
+                         requiredMessage="#{msg['reg.email.req']}"/>
+
+            <p:outputLabel for="pass1" value="#{msg['reg.psw']}"/>
+            <p:password id="pass1" value="" required="true"
+                        requiredMessage="#{msg['reg.psw.req']}"
+                        match="pass2" feedback="true" inline="true">
+            </p:password>
+
+            <p:outputLabel for="pass2" value="#{msg['reg.psw2']}"/>
+            <p:password id="pass2" value="" required="true"
+                        requiredMessage="#{msg['reg.psw.req']}"/>
+        </p:panelGrid>
+        <h:commandButton type="submit" id="login-button" value="#{msg['reg']}"/>
+    </h:form>
+
+
+</ui:composition>

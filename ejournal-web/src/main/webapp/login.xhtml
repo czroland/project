@@ -10,6 +10,18 @@
 
     <ui:define name="body">
 
+        <div class="text-center">
+            <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}">
+                <ui:include src="WEB-INF/includes/login.xhtml"/>
+                <ui:include src="WEB-INF/includes/login-form.xhtml"/>
+            </p:panel>
+
+            <p:outputLabel rendered="#{facesContext.externalContext.userPrincipal != null}"
+                           styleClass="center-block">
+                <h2 style="text-align: center">#{msg['login.alredy.logged']}</h2>
+            </p:outputLabel>
+        </div>
+
     </ui:define>
 </ui:composition>
 </html>
