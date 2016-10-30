@@ -47,11 +47,7 @@ public class ParentServiceImpl extends AbstractMappingService implements ParentS
 
     @Override
     public ParentVo getParentByName(String name) {
-        Parent parent = null;
-        parent = parentRepository.findByName(name);
-        if (parent != null) {
-            return map(parent, ParentVo.class);
-        }
+
         return null;
     }
 

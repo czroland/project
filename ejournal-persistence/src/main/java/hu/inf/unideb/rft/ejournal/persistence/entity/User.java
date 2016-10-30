@@ -13,6 +13,14 @@ public class User extends BaseEntity {
 
     @Basic
     @Column(nullable = false)
+    private String firstName;
+
+    @Basic
+    @Column(nullable = false)
+    private String lastName;
+
+    @Basic
+    @Column(nullable = false)
     private String email;
 
     @Basic
@@ -52,5 +60,21 @@ public class User extends BaseEntity {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

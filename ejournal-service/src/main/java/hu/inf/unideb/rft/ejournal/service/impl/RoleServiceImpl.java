@@ -48,6 +48,6 @@ public class RoleServiceImpl  extends AbstractMappingService implements RoleServ
     @Override
     public List<RoleVo> getRolesByUserId(Long id) {
 
-        return map(roleRepository.findByUserId(id), RoleVo.class);
+        return map(roleRepository.findRolesByUserId(id), RoleVo.class);
     }
 }

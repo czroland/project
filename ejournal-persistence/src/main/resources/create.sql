@@ -9,3 +9,4 @@ INSERT INTO public.roles( id, name ) VALUES (1, 'ADMIN');
 INSERT INTO public.roles( id, name ) VALUES (2, 'TEACHER');
 INSERT INTO public.roles( id, name ) VALUES (3, 'STUDENT');
 INSERT INTO public.roles( id, name ) VALUES (4, 'PARENT');
+INSERT INTO public.roles( id, name ) VALUES (4, 'USER');
