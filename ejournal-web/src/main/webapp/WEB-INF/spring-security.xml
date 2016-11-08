@@ -10,12 +10,12 @@
         <security:headers disabled="true"/>
 
         <security:form-login login-page="/login.xhtml"
-                             login-processing-url="/login" default-target-url="/home.xhtml"
-                             authentication-failure-url="/login.xhtml?error=true"
+                             login-processing-url="/login" default-target-url="/index.xhtml"
+                             authentication-failure-url="/login.xhtml"
                              username-parameter="username" password-parameter="password"/>
         <security:logout logout-url="/logout"
                          invalidate-session="true"
-                         logout-success-url="/index.xhtml.xhtml"/>
+                         logout-success-url="/index.xhtml"/>
 
     </security:http>
 

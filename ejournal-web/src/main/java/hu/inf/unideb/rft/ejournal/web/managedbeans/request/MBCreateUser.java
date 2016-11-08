@@ -1,6 +1,5 @@
 package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 
-import hu.inf.unideb.rft.ejournal.service.RoleService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBUser;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

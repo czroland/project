@@ -9,7 +9,8 @@
         <p:panelGrid columns="2" layout="grid">
             <p:outputLabel for="uname" value="#{msg['reg.uname']}"/>
             <p:inputText id="uname" value="#{userBean.user.name}" required="true"
-                         requiredMessage="#{msg['reg.uname.req']}"/>
+                         requiredMessage="#{msg['reg.uname.req']}"
+                         validator="#{userNameValidatorBean.validate}"/>
 
             <p:outputLabel for="fname" value="#{msg['reg.fname']}"/>
             <p:inputText id="fname" value="#{userBean.user.firstName}" required="true"
@@ -21,12 +22,14 @@
 
             <p:outputLabel for="email" value="#{msg['reg.email']}"/>
             <p:inputText id="email" value="#{userBean.user.email}" required="true"
-                         requiredMessage="#{msg['reg.email.req']}"/>
+                         requiredMessage="#{msg['reg.email.req']}"
+                         validator="#{emailAddressValidatorBean.validate}"/>
 
             <p:outputLabel for="pass1" value="#{msg['reg.psw']}"/>
             <p:password id="pass1" value="#{userBean.user.password}" required="true"
                         requiredMessage="#{msg['reg.psw.req']}"
-                        match="pass2" feedback="true" inline="true">
+                        match="pass2" feedback="true" inline="true" validatorMessage="#{msg['reg.psw.same']}">
+                <f:validator validatorId="passwordValidator"/>
             </p:password>
 
             <p:outputLabel for="pass2" value="#{msg['reg.psw2']}"/>
@@ -34,7 +37,7 @@
                         requiredMessage="#{msg['reg.psw.req']}"/>
         </p:panelGrid>
         <h:commandButton type="submit" id="login-button" value="#{msg['reg']}"
-        action="#{createUserBean.doCreate}"/>
+                         action="#{createUserBean.doCreate}"/>
     </h:form>
 
 
