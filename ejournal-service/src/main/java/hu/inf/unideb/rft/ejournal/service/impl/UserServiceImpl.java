@@ -1,15 +1,19 @@
 package hu.inf.unideb.rft.ejournal.service.impl;
 
 
+import hu.inf.unideb.rft.ejournal.persistence.entity.Role;
 import hu.inf.unideb.rft.ejournal.persistence.entity.User;
+import hu.inf.unideb.rft.ejournal.persistence.repository.RoleRepository;
 import hu.inf.unideb.rft.ejournal.persistence.repository.UserRepository;
 import hu.inf.unideb.rft.ejournal.service.UserService;
+import hu.inf.unideb.rft.ejournal.vo.RoleVo;
 import hu.inf.unideb.rft.ejournal.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless(name = "UserService", mappedName = "UserService")
@@ -23,9 +27,40 @@ public class UserServiceImpl extends AbstractMappingService implements UserServi
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Override
     public void saveUser(UserVo userVo) {
-        userRepository.save(map(userVo, User.class));
+
+        User user = map(userVo, User.class);
+        if(user.getRoles()== null){
+            user.setRoles(new ArrayList<>(1));
+        }
+        addUserRole(user);
+        userRepository.save(user);
+
+    }
+
+    private void addUserRole(User userEntity) {
+        Role role = roleRepository.findByName("USER");
+        userEntity.getRoles().add(role);
+    }
+
+    @Override
+    public void addRoleToUser(String name, RoleVo roleVo) {
+        boolean contains = false;
+
+        for (Role role : userRepository.findByName(name).getRoles()) {
+            contains = role.getName().equals(roleVo.getName());
+            if (contains) {
+                break;
+            }
+        }
+
+        if (!contains) {
+            userRepository.findByName(name).getRoles().add(map(roleVo, Role.class));
+        }
     }
 
     @Override

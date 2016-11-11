@@ -9,6 +9,9 @@
         <security:csrf disabled="true"/>
         <security:headers disabled="true"/>
 
+        <security:intercept-url pattern="/admin/*"
+                                access="hasRole('ADMIN')"/>
+
         <security:form-login login-page="/login.xhtml"
                              login-processing-url="/login" default-target-url="/index.xhtml"
                              authentication-failure-url="/login.xhtml"
