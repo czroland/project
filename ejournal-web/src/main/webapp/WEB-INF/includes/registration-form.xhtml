@@ -37,15 +37,16 @@
                         requiredMessage="#{msg['reg.psw.req']}"/>
 
             <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('termsDialog').show();">
-                <h:outputLabel for="tof" value="Terms of use"/>
+                <h:outputLabel for="tof" value="#{msg['reg.terms']} : *"/>
             </h:outputLink>
 
             <p:selectBooleanCheckbox widgetVar="myCheckbox" required="true">
                 <f:validator validatorId="checkboxValidator"/>
             </p:selectBooleanCheckbox>
 
-            <p:dialog id="tof" modal="true" closeOnEscape="true" header="Terms of use"
-                      widgetVar="termsDialog" showEffect="fade" hideEffect="fade" resizable="false" style="max-height:1200px">
+            <p:dialog id="tof" modal="true" closeOnEscape="true" header="#{msg['reg.terms']}"
+                      widgetVar="termsDialog" showEffect="fade" hideEffect="fade" resizable="false"
+                      style="max-height:1200px">
                 <p:scrollPanel mode="native" style="max-height:500px">
                     <ui:include src="terms.xhtml"/>
                 </p:scrollPanel>

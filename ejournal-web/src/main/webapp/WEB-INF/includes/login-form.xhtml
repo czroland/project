@@ -13,13 +13,12 @@
                          requiredMessage="#{msg['login.name.req']}"/>
 
             <p:outputLabel for="password" value="#{msg['login.psw']}"/>
-            <p:password id="password" value="#{loginBean.password
-            }" required="true"
+            <p:password id="password" value="#{loginBean.password}" required="true"
                         requiredMessage="#{msg['login.psw.req']}"/>
 
         </p:panelGrid>
-            <h:commandButton type="submit" id="login-button" value="#{msg['login']}" action="#{loginBean.login}"/>
-            <ui:param name="logged-in" value=""/>
+        <h:commandButton type="submit" id="login-button" value="#{msg['login']}" action="#{loginBean.login}"/>
+        <ui:param name="logged-in" value=""/>
 
     </h:form>
 </ui:composition>
