@@ -15,4 +15,7 @@ public interface RoleService {
 
     List<RoleVo> getRolesByUserId(Long id);
 
+    List<RoleVo> getAllRoles();
+
+
 }

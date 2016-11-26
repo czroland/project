@@ -12,6 +12,8 @@ public interface UserService {
 
     void addRoleToUser(String name, RoleVo roleVo);
 
+    void removeRoleFromUser(String name, RoleVo roleVo);
+
     List<UserVo> getAllUsers();
 
     UserVo getUserById(Long id);

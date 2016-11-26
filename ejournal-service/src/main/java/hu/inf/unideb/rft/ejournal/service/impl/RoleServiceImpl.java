@@ -16,7 +16,8 @@ import java.util.List;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(RoleService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
-public class RoleServiceImpl  extends AbstractMappingService implements RoleService{
+public class RoleServiceImpl extends AbstractMappingService implements RoleService {
+
     @Autowired
     private RoleRepository roleRepository;
 
@@ -49,5 +50,11 @@ public class RoleServiceImpl  extends AbstractMappingService implements RoleServ
     public List<RoleVo> getRolesByUserId(Long id) {
 
         return map(roleRepository.findRolesByUserId(id), RoleVo.class);
+    }
+
+    @Override
+    public List<RoleVo> getAllRoles() {
+        return map(roleRepository.findAll(), RoleVo.class);
+
     }
 }

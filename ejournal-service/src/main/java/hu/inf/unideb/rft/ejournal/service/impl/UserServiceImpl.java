@@ -15,6 +15,7 @@ import javax.ejb.*;
 import javax.interceptor.Interceptors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless(name = "UserService", mappedName = "UserService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -34,7 +35,7 @@ public class UserServiceImpl extends AbstractMappingService implements UserServi
     public void saveUser(UserVo userVo) {
 
         User user = map(userVo, User.class);
-        if(user.getRoles()== null){
+        if (user.getRoles() == null) {
             user.setRoles(new ArrayList<>(1));
         }
         addUserRole(user);
@@ -43,7 +44,7 @@ public class UserServiceImpl extends AbstractMappingService implements UserServi
     }
 
     private void addUserRole(User userEntity) {
-        Role role = roleRepository.findByName("USER");
+        Role role = roleRepository.findByName("ROLE_USER");
         userEntity.getRoles().add(role);
     }
 
@@ -53,14 +54,23 @@ public class UserServiceImpl extends AbstractMappingService implements UserServi
 
         for (Role role : userRepository.findByName(name).getRoles()) {
             contains = role.getName().equals(roleVo.getName());
-            if (contains) {
-                break;
-            }
+            if (contains) break;
         }
 
         if (!contains) {
             userRepository.findByName(name).getRoles().add(map(roleVo, Role.class));
         }
+    }
+
+    @Override
+    public void removeRoleFromUser(String name, RoleVo roleVo) {
+        List<Role> newRoles = userRepository.findByName(name)
+                .getRoles()
+                .stream()
+                .filter(role -> !(role.getName().equals(roleVo.getName())))
+                .collect(Collectors.toList());
+
+        userRepository.findByName(name).setRoles(newRoles);
     }
 
     @Override
@@ -70,7 +80,7 @@ public class UserServiceImpl extends AbstractMappingService implements UserServi
 
     @Override
     public UserVo getUserById(Long id) {
-        User user = null;
+        User user;
         user = userRepository.findById(id);
         if (user != null) {
             return map(user, UserVo.class);
@@ -80,7 +90,7 @@ public class UserServiceImpl extends AbstractMappingService implements UserServi
 
     @Override
     public UserVo getUserByName(String name) {
-        User user = null;
+        User user;
         user = userRepository.findByName(name);
         if (user != null) {
             return map(user, UserVo.class);
@@ -90,7 +100,7 @@ public class UserServiceImpl extends AbstractMappingService implements UserServi
 
     @Override
     public UserVo getUserByEmail(String email) {
-        User user = null;
+        User user;
         user = userRepository.findByEmail(email);
         if (user != null) {
             return map(user, UserVo.class);
