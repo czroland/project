@@ -10,10 +10,41 @@
 
     <ui:define name="body">
         <div class="text-center">
+
             <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}">
                 <ui:include src="WEB-INF/includes/registration.xhtml"/>
-                <ui:include src="WEB-INF/includes/registration-form.xhtml"/>
             </p:panel>
+
+            <p:panelGrid styleClass="img-responsive" columns="2" layout="grid"
+                         rendered="#{facesContext.externalContext.userPrincipal == null}">
+
+                <p:column>
+
+                    <div class="center-block">
+                        <h2 style="text-align: center">#{msg['reg.student']}</h2>
+                        <h:outputLink value="/../ejournal/registration/student.xhtml">
+                            <h:graphicImage styleClass="image" style="width: 400px; align: center"
+                                            library="images"
+                                            name="parent.png"/>
+                        </h:outputLink>
+                    </div>
+                </p:column>
+                <p:column>
+
+                    <div class="center-block">
+                        <h2 style="text-align: center">#{msg['reg.teacher']}</h2>
+                        <h:outputLink value="/../ejournal/registration/teacher.xhtml">
+                            <h:graphicImage styleClass="image" style="width: 400px; align:center"
+                                            library="images"
+                                            name="teacher.png"/>
+                        </h:outputLink>
+                    </div>
+                </p:column>
+
+            </p:panelGrid>
+
+            <!--
+            <ui:include src="WEB-INF/includes/registration-form.xhtml"/>-->
 
             <p:outputLabel rendered="#{facesContext.externalContext.userPrincipal != null}"
                            styleClass="center-block">

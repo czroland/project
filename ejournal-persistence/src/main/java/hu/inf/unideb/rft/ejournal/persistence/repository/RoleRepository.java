@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-
-
     Role findById(Long id);
 
     Role findByName(String name);
