@@ -5,7 +5,9 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:form id="form">
-        <p:wizard styleClass="wizard" flowListener="#{registerStudent.onFlowProcess}">
+        <p:wizard styleClass="wizard" flowListener="#{registerStudent.onFlowProcess}"
+                  nextLabel="#{msg['wiz.next']}"
+                  backLabel="#{msg['wiz.back']}">
             <p:tab id="user" title="#{msg['reg.st']}">
                 <p:panel header="#{msg['reg.st']}">
                     <div class="centered-block">
