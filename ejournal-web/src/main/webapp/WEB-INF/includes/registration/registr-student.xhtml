@@ -1,0 +1,190 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:form id="form">
+        <p:wizard styleClass="wizard" flowListener="#{registerStudent.onFlowProcess}">
+            <p:tab id="user" title="#{msg['reg.st']}">
+                <p:panel header="#{msg['reg.st']}">
+                    <div class="centered-block">
+                        <p:messages showSummary="true" showDetail="false"/>
+                        <p:panelGrid columns="2" layout="grid">
+                            <p:outputLabel for="uname" value="#{msg['reg.uname']}"/>
+                            <p:inputText id="uname" value="#{studentBean.student.user.name}" required="true"
+                                         requiredMessage="#{msg['reg.uname.req']}"
+                            />
+
+                            <p:outputLabel for="fname" value="#{msg['reg.fname']}"/>
+                            <p:inputText id="fname" value="#{studentBean.student.user.firstName}" required="true"
+                                         requiredMessage="#{msg['reg.fname.req']}"/>
+
+                            <p:outputLabel for="lname" value="#{msg['reg.lname']}"/>
+                            <p:inputText id="lname" value="#{studentBean.student.user.lastName}" required="true"
+                                         requiredMessage="#{msg['reg.lname.req']}"/>
+
+                            <p:outputLabel for="email" value="#{msg['reg.email']}"/>
+                            <p:inputText id="email" value="#{studentBean.student.user.email}" required="true"
+                                         requiredMessage="#{msg['reg.email.req']}"
+                                         validator="#{emailAddressValidatorBean.validate}"/>
+
+                            <p:outputLabel for="pass1" value="#{msg['reg.psw']}"/>
+                            <p:password id="pass1" value="#{studentBean.student.user.password}" required="true"
+                                        requiredMessage="#{msg['reg.psw.req']}"
+                                        match="pass2" feedback="true" inline="true"
+                                        validatorMessage="#{msg['reg.psw.same']}">
+                                <f:validator validatorId="passwordValidator"/>
+                            </p:password>
+
+                            <p:outputLabel for="pass2" value="#{msg['reg.psw2']}"/>
+                            <p:password id="pass2" value="#{studentBean.student.user.password}" required="true"
+                                        requiredMessage="#{msg['reg.psw.req']}"/>
+
+                            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                                          onclick="PF('termsDialog').show();">
+                                <h:outputLabel for="tof" value="#{msg['reg.terms']} : *"/>
+                            </h:outputLink>
+
+                            <p:selectBooleanCheckbox widgetVar="myCheckbox" required="true">
+                                <f:validator validatorId="checkboxValidator"/>
+                            </p:selectBooleanCheckbox>
+
+                            <p:dialog id="tof" modal="true" closeOnEscape="true" header="#{msg['reg.terms']}"
+                                      widgetVar="termsDialog" showEffect="fade" hideEffect="fade" resizable="false"
+                                      style="max-height:1200px">
+                                <p:scrollPanel mode="native" style="max-height:500px">
+                                    <ui:include src="../terms.xhtml"/>
+                                </p:scrollPanel>
+                            </p:dialog>
+                        </p:panelGrid>
+                    </div>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="parent" title="#{msg['reg.pa']}">
+                <p:panel header="#{msg['reg.pa']}">
+                    <div class="centered-block">
+                        <p:messages showSummary="true" showDetail="false"/>
+                        <p:panelGrid columns="2" layout="grid">
+                            <p:outputLabel for="p-uname" value="#{msg['reg.uname']}"/>
+                            <p:inputText id="p-uname" value="#{studentBean.student.parent.user.name}" required="true"
+                                         requiredMessage="#{msg['reg.uname.req']}"
+                                         validator="#{userNameValidatorBean.validate}"/>
+
+                            <p:outputLabel for="p-fname" value="#{msg['reg.fname']}"/>
+                            <p:inputText id="p-fname" value="#{studentBean.student.parent.user.firstName}"
+                                         required="true"
+                                         requiredMessage="#{msg['reg.fname.req']}"/>
+
+                            <p:outputLabel for="p-lname" value="#{msg['reg.lname']}"/>
+                            <p:inputText id="p-lname" value="#{studentBean.student.parent.user.lastName}"
+                                         required="true"
+                                         requiredMessage="#{msg['reg.lname.req']}"/>
+
+                            <p:outputLabel for="p-email" value="#{msg['reg.email']}"/>
+                            <p:inputText id="p-email" value="#{studentBean.student.parent.user.email}" required="true"
+                                         requiredMessage="#{msg['reg.email.req']}"
+                                         validator="#{emailAddressValidatorBean.validate}"/>
+
+                            <p:outputLabel for="p-pass1" value="#{msg['reg.psw']}"/>
+                            <p:password id="p-pass1" value="#{studentBean.student.parent.user.password}" required="true"
+                                        requiredMessage="#{msg['reg.psw.req']}"
+                                        match="p-pass2" feedback="true" inline="true"
+                                        validatorMessage="#{msg['reg.psw.same']}">
+                                <f:validator validatorId="passwordValidator"/>
+                            </p:password>
+
+                            <p:outputLabel for="p-pass2" value="#{msg['reg.psw2']}"/>
+                            <p:password id="p-pass2" value="#{studentBean.student.parent.user.password}" required="true"
+                                        requiredMessage="#{msg['reg.psw.req']}"/>
+
+                            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                                          onclick="PF('termsDialog').show();">
+                                <h:outputLabel for="p-tof" value="#{msg['reg.terms']} : *"/>
+                            </h:outputLink>
+
+                            <p:selectBooleanCheckbox widgetVar="myCheckbox" required="true">
+                                <f:validator validatorId="checkboxValidator"/>
+                            </p:selectBooleanCheckbox>
+
+                            <p:dialog id="p-tof" modal="true" closeOnEscape="true" header="#{msg['reg.terms']}"
+                                      widgetVar="termsDialog" showEffect="fade" hideEffect="fade" resizable="false"
+                                      style="max-height:1200px">
+                                <p:scrollPanel mode="native" style="max-height:500px">
+                                    <ui:include src="../terms.xhtml"/>
+                                </p:scrollPanel>
+                            </p:dialog>
+                        </p:panelGrid>
+                    </div>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="confirm" title="#{msg['reg.val']}">
+                <p:panel header="#{msg['reg.val']}">
+                    <div class="wizard-padding">
+                        <div class="centered-flex">
+                            <p:panelGrid columns="2" layout="grid">
+                                <p:column>
+
+                                    <div class="center-block">
+
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.fname']}"/>
+                                            <p:outputLabel value="#{studentBean.student.user.firstName}"/>
+                                        </div>
+
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.lname']}"/>
+                                            <p:outputLabel value="#{studentBean.student.user.lastName}"/>
+                                        </div>
+
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.uname']}"/>
+                                            <p:outputLabel value="#{studentBean.student.user.name}"/>
+                                        </div>
+
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.email']}"/>
+                                            <p:outputLabel value="#{studentBean.student.user.email}"/>
+                                        </div>
+                                    </div>
+                                </p:column>
+
+                                <p:column>
+
+                                    <div class="center-block">
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.fname']}"/>
+                                            <p:outputLabel value="#{studentBean.student.parent.user.firstName}"/>
+                                        </div>
+
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.lname']}"/>
+                                            <p:outputLabel value="#{studentBean.student.parent.user.lastName}"/>
+                                        </div>
+
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.uname']}"/>
+                                            <p:outputLabel value="#{studentBean.student.parent.user.name}"/>
+                                        </div>
+
+                                        <div>
+                                            <p:outputLabel value="#{msg['reg.email']}"/>
+                                            <p:outputLabel value="#{studentBean.student.parent.user.email}"/>
+                                        </div>
+                                    </div>
+                                </p:column>
+                            </p:panelGrid>
+                        </div>
+
+                        <p:commandButton value="#{msg['reg']}"
+                                         action="#{registerStudent.doCreate}" process="@this"
+                                         style="margin: 20px"/>
+                    </div>
+                </p:panel>
+            </p:tab>
+        </p:wizard>
+    </h:form>
+
+</ui:composition>

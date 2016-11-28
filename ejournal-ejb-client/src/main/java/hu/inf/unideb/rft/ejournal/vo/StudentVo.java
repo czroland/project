@@ -15,6 +15,9 @@ public class StudentVo implements Serializable {
 
     private ClassVo aclass;
 
+    public StudentVo() {
+    }
+
     public Long getId() {
         return id;
     }

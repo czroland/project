@@ -11,6 +11,8 @@ public class ParentVo implements Serializable {
 
     private UserVo user;
 
+    private Long studentId;
+
     public Long getId() {
         return id;
     }
@@ -25,5 +27,13 @@ public class ParentVo implements Serializable {
 
     public void setUser(UserVo user) {
         this.user = user;
+    }
+
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 }

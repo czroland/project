@@ -8,7 +8,7 @@ import java.lang.*;
 @Table(name = "students")
 public class Student extends BaseEntity {
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 

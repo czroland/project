@@ -6,7 +6,10 @@ import javax.persistence.*;
 @Table(name = "parents")
 public class Parent extends BaseEntity {
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @OneToOne(mappedBy = "parent")
+    private Student student;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -16,5 +19,13 @@ public class Parent extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
