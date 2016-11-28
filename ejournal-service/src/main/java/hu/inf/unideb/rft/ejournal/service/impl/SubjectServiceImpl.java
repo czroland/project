@@ -9,6 +9,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.List;
 
 @Stateless(name = "SubjectService", mappedName = "SubjectService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -22,6 +23,12 @@ public class SubjectServiceImpl extends AbstractMappingService implements Subjec
     @Override
     public void saveSubject(SubjectVo subjectVo) {
         subjectRepository.save(map(subjectVo, Subject.class));
+    }
+
+    @Override
+    public List<SubjectVo> getAllSubjects() {
+
+        return map(subjectRepository.findAll(), SubjectVo.class);
     }
 
     @Override
