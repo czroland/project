@@ -3,6 +3,7 @@ package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 
 import hu.inf.unideb.rft.ejournal.service.ParentService;
 import hu.inf.unideb.rft.ejournal.service.StudentService;
+import hu.inf.unideb.rft.ejournal.web.email_operations.SendEmail;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBStudent;
 import org.primefaces.event.FlowEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,6 +45,9 @@ public class MBRegisterStudent {
                         .getPassword()));
 
         studentService.saveStudent(student.getStudent());
+        SendEmail email = new SendEmail();
+        email.sendMessage(student.getStudent().getUser().getEmail());
+        email.sendMessage(student.getStudent().getParent().getUser().getEmail());
         return "200";
     }
 
