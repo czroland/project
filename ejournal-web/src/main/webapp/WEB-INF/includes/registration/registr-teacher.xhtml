@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:form id="registration-form">
+        <p:messages showSummary="true" showDetail="false"/>
+        <p:panelGrid columns="2" layout="grid">
+            <p:outputLabel for="uname" value="#{msg['reg.uname']}"/>
+            <p:inputText id="uname" value="#{teacherBean.teacher.user.name}" required="true"
+                         requiredMessage="#{msg['reg.uname.req']}"
+                         validator="#{userNameValidatorBean.validate}"/>
+
+            <p:outputLabel for="fname" value="#{msg['reg.fname']}"/>
+            <p:inputText id="fname" value="#{teacherBean.teacher.user.firstName}" required="true"
+                         requiredMessage="#{msg['reg.fname.req']}"/>
+
+            <p:outputLabel for="lname" value="#{msg['reg.lname']}"/>
+            <p:inputText id="lname" value="#{teacherBean.teacher.user.lastName}" required="true"
+                         requiredMessage="#{msg['reg.lname.req']}"/>
+
+            <p:outputLabel for="email" value="#{msg['reg.email']}"/>
+            <p:inputText id="email" value="#{teacherBean.teacher.user.email}" required="true"
+                         requiredMessage="#{msg['reg.email.req']}"
+                         validator="#{emailAddressValidatorBean.validate}"/>
+
+            <h:outputLabel for="subject" value="subject *"/>
+            <p:selectOneMenu id="subject" required="true"
+                             value="#{teacherBean.teacher.subject}" converter="subjectVoConverter"
+                             requiredMessage="subject required">
+                <f:selectItem itemLabel="select one bitte" itemValue=""/>
+                <f:selectItems value="#{subjectBean.subjects}" var="subject"
+                               itemLabel="#{subject.name}" itemValue="#{subject}"/>
+            </p:selectOneMenu>
+
+            <p:outputLabel for="pass1" value="#{msg['reg.psw']}"/>
+            <p:password id="pass1" value="#{teacherBean.teacher.user.password}" required="true"
+                        requiredMessage="#{msg['reg.psw.req']}"
+                        match="pass2" feedback="true" inline="true" validatorMessage="#{msg['reg.psw.same']}">
+                <f:validator validatorId="passwordValidator"/>
+            </p:password>
+
+            <p:outputLabel for="pass2" value="#{msg['reg.psw2']}"/>
+            <p:password id="pass2" value="#{teacherBean.teacher.user.password}" required="true"
+                        requiredMessage="#{msg['reg.psw.req']}"/>
+
+            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('termsDialog').show();">
+                <h:outputLabel for="tof" value="#{msg['reg.terms']} : *"/>
+            </h:outputLink>
+
+            <p:selectBooleanCheckbox widgetVar="myCheckbox" required="true">
+                <f:validator validatorId="checkboxValidator"/>
+            </p:selectBooleanCheckbox>
+
+            <p:dialog id="tof" modal="true" closeOnEscape="true" header="#{msg['reg.terms']}"
+                      widgetVar="termsDialog" showEffect="fade" hideEffect="fade" resizable="false"
+                      style="max-height:1200px">
+                <p:scrollPanel mode="native" style="max-height:500px">
+                    <ui:include src="../terms.xhtml"/>
+                </p:scrollPanel>
+            </p:dialog>
+
+        </p:panelGrid>
+        <h:commandButton type="submit" id="login-button" value="#{msg['reg']}"
+                         action="#{createUserBean.doCreate}"/>
+    </h:form>
+
+
+</ui:composition>
