@@ -27,7 +27,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/registration.xhtml.xhtml</from-view-id>
+        <from-view-id>/registration.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>registration</from-outcome>
             <to-view-id>/registration/teacher.xhtml</to-view-id>
@@ -39,13 +39,22 @@
         <from-view-id>/registration.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>registration</from-outcome>
-            <to-view-id>/registration/student.xhtml.xhtml</to-view-id>
+            <to-view-id>/registration/student.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
         <from-view-id>/registration/student.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>200</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/registration/teacher.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>200</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>

@@ -40,3 +40,8 @@ footer span {
 .panel-paddin {
     padding: 2px 5px ;
 }
+
+.ui-selectonemenu{
+    min-width: 205px;
+}
+

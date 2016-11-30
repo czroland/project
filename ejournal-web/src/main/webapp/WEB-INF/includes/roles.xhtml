@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <p:selectOneRadio id="roles" value="#{roleBean.userRole}" layout="responsive" columns="4">
+    <p:selectOneRadio id="roles" value="#{roleBean.userRole}" layout="responsive" columns="5">
         <f:selectItems value="#{roleBean.roles}" var="userRole"
                        itemLabel="#{msg['role.'+=userRole.name]}" itemValue="#{userRole.name}"/>
     </p:selectOneRadio>

@@ -3,8 +3,12 @@ package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 
 import hu.inf.unideb.rft.ejournal.service.EmailService;
 import hu.inf.unideb.rft.ejournal.service.ParentService;
+import hu.inf.unideb.rft.ejournal.service.RoleService;
 import hu.inf.unideb.rft.ejournal.service.StudentService;
+import hu.inf.unideb.rft.ejournal.service.UserService;
+import hu.inf.unideb.rft.ejournal.vo.RoleVo;
 import hu.inf.unideb.rft.ejournal.web.email_operations.SendEmail;
+import hu.inf.unideb.rft.ejournal.web.enums.Roles;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBStudent;
 import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,12 @@ public class MBRegisterStudent {
 
     @EJB
     StudentService studentService;
+
+    @EJB
+    UserService userService;
+
+    @EJB
+    RoleService roleService;
 
     @EJB
     ParentService parentService;
@@ -50,12 +60,26 @@ public class MBRegisterStudent {
                         .getPassword()));
 
         studentService.saveStudent(student.getStudent());
+<<<<<<< HEAD
 
 
         //SendEmail email = new SendEmail();
         email.sendMessage(student.getStudent().getUser().getEmail(),student.getStudent().getUser().getFirstName(),student.getStudent().getUser().getLastName());
         email.sendMessage(student.getStudent().getParent().getUser().getEmail(),student.getStudent().getParent().getUser().getFirstName(),student.getStudent().getParent().getUser().getLastName());
+=======
+        userService.addRoleToUser(student.getStudent()
+                .getUser().getName(), role(Roles.ROLE_STUDENT.toString()));
+        userService.addRoleToUser(student.getStudent().getParent()
+                .getUser().getName(), role(Roles.ROLE_PARENT.toString()));
+        SendEmail email = new SendEmail();
+        email.sendMessage(student.getStudent().getUser().getEmail());
+        email.sendMessage(student.getStudent().getParent().getUser().getEmail());
+>>>>>>> 3a75d7ce2846e1cb80e682a8e38152a1a5d42ed0
         return "200";
+    }
+
+    RoleVo role(String role){
+        return roleService.getRoleByName(role);
     }
 
     public String onFlowProcess(FlowEvent event) {
@@ -84,5 +108,21 @@ public class MBRegisterStudent {
 
     public void setParentService(ParentService parentService) {
         this.parentService = parentService;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public RoleService getRoleService() {
+        return roleService;
+    }
+
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
     }
 }
