@@ -1,11 +1,13 @@
 package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 
 
+import hu.inf.unideb.rft.ejournal.service.EmailService;
 import hu.inf.unideb.rft.ejournal.service.ParentService;
 import hu.inf.unideb.rft.ejournal.service.StudentService;
 import hu.inf.unideb.rft.ejournal.web.email_operations.SendEmail;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBStudent;
 import org.primefaces.event.FlowEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -27,6 +29,9 @@ public class MBRegisterStudent {
     @EJB
     ParentService parentService;
 
+    @EJB
+    EmailService email;
+
     public String doCreate() {
 
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -45,9 +50,11 @@ public class MBRegisterStudent {
                         .getPassword()));
 
         studentService.saveStudent(student.getStudent());
-        SendEmail email = new SendEmail();
-        email.sendMessage(student.getStudent().getUser().getEmail());
-        email.sendMessage(student.getStudent().getParent().getUser().getEmail());
+
+
+        //SendEmail email = new SendEmail();
+        email.sendMessage(student.getStudent().getUser().getEmail(),student.getStudent().getUser().getFirstName(),student.getStudent().getUser().getLastName());
+        email.sendMessage(student.getStudent().getParent().getUser().getEmail(),student.getStudent().getParent().getUser().getFirstName(),student.getStudent().getParent().getUser().getLastName());
         return "200";
     }
 
