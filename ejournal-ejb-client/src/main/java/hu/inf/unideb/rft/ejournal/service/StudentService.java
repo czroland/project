@@ -9,7 +9,7 @@ public interface StudentService {
 
     void saveStudent(StudentVo studentVo);
 
-    List<StudentVo> getAllUsers();
+    List<StudentVo> getAllStudents();
 
     StudentVo getStudentById(Long id);
 

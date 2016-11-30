@@ -25,15 +25,6 @@
                          requiredMessage="#{msg['reg.email.req']}"
                          validator="#{emailAddressValidatorBean.validate}"/>
 
-            <h:outputLabel for="subject" value="subject *"/>
-            <p:selectOneMenu id="subject" required="true"
-                             value="#{teacherBean.teacher.subject}" converter="subjectVoConverter"
-                             requiredMessage="subject required">
-                <f:selectItem itemLabel="select one bitte" itemValue=""/>
-                <f:selectItems value="#{subjectBean.subjects}" var="subject"
-                               itemLabel="#{subject.name}" itemValue="#{subject}"/>
-            </p:selectOneMenu>
-
             <p:outputLabel for="pass1" value="#{msg['reg.psw']}"/>
             <p:password id="pass1" value="#{teacherBean.teacher.user.password}" required="true"
                         requiredMessage="#{msg['reg.psw.req']}"
@@ -63,7 +54,7 @@
 
         </p:panelGrid>
         <h:commandButton type="submit" id="login-button" value="#{msg['reg']}"
-                         action="#{createUserBean.doCreate}"/>
+                         action="#{registerTeacher.doCreate}"/>
     </h:form>
 
 

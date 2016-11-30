@@ -29,7 +29,7 @@ public class StudentServiceImpl extends AbstractMappingService implements Studen
     }
 
     @Override
-    public List<StudentVo> getAllUsers() {
+    public List<StudentVo> getAllStudents() {
         return map(studentRepository.findAll(), StudentVo.class);
     }
 

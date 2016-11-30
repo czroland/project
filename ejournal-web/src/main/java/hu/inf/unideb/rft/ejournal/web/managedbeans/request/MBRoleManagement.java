@@ -23,7 +23,6 @@ public class MBRoleManagement {
     @ManagedProperty(value = "#{userBean}")
     private MBUser user;
 
-    //TODO:refactor
     public void addRole(List<UserVo> users, String role) {
         RoleVo roleVo = roleService.getRoleByName(role);
 
