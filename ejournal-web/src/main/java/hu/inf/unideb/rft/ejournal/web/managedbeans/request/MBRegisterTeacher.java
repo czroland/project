@@ -1,6 +1,7 @@
 package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 
 
+import hu.inf.unideb.rft.ejournal.service.EmailService;
 import hu.inf.unideb.rft.ejournal.service.RoleService;
 import hu.inf.unideb.rft.ejournal.service.TeacherService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
@@ -31,6 +32,9 @@ public class MBRegisterTeacher {
     @EJB
     UserService userService;
 
+    @EJB
+    EmailService email;
+
     public String doCreate() {
 
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -46,6 +50,7 @@ public class MBRegisterTeacher {
         teacherService.saveTeacher(teacher.getTeacher());
         userService.addRoleToUser(teacher.getTeacher()
                 .getUser().getName(), roleVo);
+        email.sendMessage(teacher.getTeacher().getUser().getEmail(),teacher.getTeacher().getUser().getFirstName(),teacher.getTeacher().getUser().getLastName());
         return "200";
     }
 

@@ -6,7 +6,7 @@ import hu.inf.unideb.rft.ejournal.service.RoleService;
 import hu.inf.unideb.rft.ejournal.service.StudentService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
 import hu.inf.unideb.rft.ejournal.vo.RoleVo;
-import hu.inf.unideb.rft.ejournal.web.email_operations.SendEmail;
+import hu.inf.unideb.rft.ejournal.service.EmailService;
 import hu.inf.unideb.rft.ejournal.web.enums.Roles;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBStudent;
 import org.primefaces.event.FlowEvent;
@@ -37,6 +37,9 @@ public class MBRegisterStudent {
     @EJB
     ParentService parentService;
 
+    @EJB
+    EmailService email;
+
     public String doCreate() {
 
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -59,9 +62,9 @@ public class MBRegisterStudent {
                 .getUser().getName(), role(Roles.ROLE_STUDENT.toString()));
         userService.addRoleToUser(student.getStudent().getParent()
                 .getUser().getName(), role(Roles.ROLE_PARENT.toString()));
-        SendEmail email = new SendEmail();
-        email.sendMessage(student.getStudent().getUser().getEmail());
-        email.sendMessage(student.getStudent().getParent().getUser().getEmail());
+
+        email.sendMessage(student.getStudent().getUser().getEmail(),student.getStudent().getUser().getFirstName(),student.getStudent().getUser().getLastName());
+        email.sendMessage(student.getStudent().getParent().getUser().getEmail(),student.getStudent().getParent().getUser().getFirstName(),student.getStudent().getParent().getUser().getLastName());
         return "200";
     }
 
