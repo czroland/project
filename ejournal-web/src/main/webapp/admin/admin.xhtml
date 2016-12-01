@@ -11,19 +11,130 @@
 
     <ui:define name="body">
 
-        <h:form id="form">
-            <p:panel widgetVar="panel">
-                <p:tabView>
-                    <p:tab title="#{msg['roles']}">
-                        <ui:include src="../WEB-INF/includes/roles.xhtml"/>
-                    </p:tab>
+        <p:panel>
 
-                    <p:tab title="#{msg['roles']}">
-                        <ui:include src="../WEB-INF/includes/teachers.xhtml"/>
-                    </p:tab>
-                </p:tabView>
-            </p:panel>
-        </h:form>
+            <p:tabView id="tab">
+
+                <p:tab title="#{msg['roles']}">
+                    <h:form>
+                        <h:panelGroup id="panel1">
+                            <p:selectOneRadio id="roles" value="#{roleBean.userRole}" layout="responsive" columns="5">
+                                <f:selectItems value="#{roleBean.roles}" var="userRole"
+                                               itemLabel="#{msg['role.'+=userRole.name]}" itemValue="#{userRole.name}"/>
+                            </p:selectOneRadio>
+
+                            <p:dataTable id="users" var="user" value="#{userBean.users.source}"
+                                         selection="#{userBean.users.target}" rowKey="#{user.id}"
+                                         style="margin-bottom:0"
+                                         rows="20"
+                                         paginator="true"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="15, 20, 50">>
+
+                                <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+
+                                <p:column headerText="#{msg['validator.uname']}" sortBy="#{user.name}">
+                                    <h:outputText value="#{user.name}"/>
+                                </p:column>
+
+                                <p:column headerText="#{msg['admin.email']}" sortBy="#{user.email}">
+                                    <h:outputText value="#{user.email}"/>
+                                </p:column>
+
+                                <p:column headerText="#{msg['roles']}">
+                                    <h:dataTable id="asd" var="role" value="#{user.roles}">
+                                        <p:column>
+                                            <h:outputText id="as" value="#{msg['role.'+=role.name]}"/>
+                                        </p:column>
+                                    </h:dataTable>
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <p:commandButton id="add-role" value="#{msg['admin.role.add']}"
+                                             style="margin-top:5px"
+                                             update="panel1"
+                                             action="#{roleMmt.addRole(userBean.users.target, roleBean.userRole)}"
+                            />
+                            <p:commandButton id="remove-role" value="#{msg['admin.role.remove']}"
+                                             style="margin-top:5px"
+                                             update="panel1"
+                                             action="#{roleMmt.removeRole(userBean.users.target, roleBean.userRole)}"
+                            />
+                        </h:panelGroup>
+                    </h:form>
+                </p:tab>
+
+                <p:tab title="#{msg['teachers']}">
+                    <h:form>
+                        <h:panelGroup id="panel2">
+
+                            <p:panelGrid columns="2" layout="grid">
+                                <h:outputLabel for="subject" value="#{msg['subject']}: *"/>
+                                <p:selectOneMenu id="subject" required="true"
+                                                 value="#{teacherBean.teacher.subject}" converter="subjectVoConverter"
+                                                 requiredMessage="#{msg['subj.reg']}">
+                                    <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                                    <f:selectItems value="#{subjectBean.subjects}" var="subject"
+                                                   itemLabel="#{subject.name}" itemValue="#{subject}"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+
+                            <p:dataTable id="teachers" var="teacher" value="#{teacherBean.teachers.source}"
+                                         selection="#{teacherBean.teachers.target}" rowKey="#{teacher.id}"
+                                         style="margin-bottom:0"
+                                         rows="20"
+                                         paginator="true"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="15, 20, 50">>
+
+                                <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+
+                                <p:column headerText="#{msg['validator.uname']}" sortBy="#{teacher.user.name}">
+                                    <h:outputText value="#{teacher.user.name}"/>
+                                </p:column>
+
+                                <p:column headerText="#{msg['fname']}" sortBy="#{teacher.user.firstName}">
+                                    <h:outputText value="#{teacher.user.firstName}"/>
+                                </p:column>
+
+                                <p:column headerText="#{msg['lname']}" sortBy="#{teacher.user.lastName}">
+                                    <h:outputText value="#{teacher.user.lastName}"/>
+                                </p:column>
+
+                                <p:column headerText="targyak" sortBy="#{teacher.user.firstName}">
+                                    <h:outputText value="#{teacher.user.firstName}"/>
+                                </p:column>
+
+                               <!-- <p:column headerText="#{msg['roles']}">
+                                    <h:dataTable var="role" value="#{user.roles}">
+                                        <p:column>
+                                            <h:outputText value="#{msg['role.'+=role.name]}"/>
+                                        </p:column>
+                                    </h:dataTable>
+                                </p:column>-->
+
+                            </p:dataTable>
+
+                           <!-- <p:commandButton id="add-role" value="#{msg['admin.role.add']}"
+                                             style="margin-top:5px"
+                                             update="panel1"
+                                             action="#{roleMmt.addRole(userBean.users.target, roleBean.userRole)}"
+                            />
+                            <p:commandButton id="remove-role" value="#{msg['admin.role.remove']}"
+                                             style="margin-top:5px"
+                                             update="panel1"
+                                             action="#{roleMmt.removeRole(userBean.users.target, roleBean.userRole)}"
+                            />-->
+
+                        </h:panelGroup>
+                    </h:form>
+                </p:tab>
+
+            </p:tabView>
+        </p:panel>
 
     </ui:define>
 </ui:composition>

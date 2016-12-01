@@ -1,12 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Title</title>
-</head>
-<body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-</body>
-</html>
+
+             <!-- <h:outputLabel for="subject" value="subject *"/>
+                <p:selectOneMenu id="subject" required="true"
+                                value="#{teacherBean.teacher.subject}" converter="subjectVoConverter"
+                                requiredMessage="subject required">
+                    <f:selectItem itemLabel="select one bitte" itemValue=""/>
+                    <f:selectItems value="#{subjectBean.subjects}" var="subject"
+                                   itemLabel="#{subject.name}" itemValue="#{subject}"/>
+                </p:selectOneMenu>-->
+
+    <!--<p:dataTable id="users" var="user" value="#{userBean.users.source}"
+                 selection="#{userBean.users.target}" rowKey="#{user.id}"
+                 style="margin-bottom:0"
+                 rows="20"
+                 paginator="true"
+                 paginatorPosition="bottom"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="15, 20, 50">>
+
+        <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+
+        <p:column headerText="#{msg['validator.uname']}" sortBy="#{user.name}">
+            <h:outputText value="#{user.name}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['admin.email']}" sortBy="#{user.email}">
+            <h:outputText value="#{user.email}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['roles']}">
+            <h:dataTable widgetVar="kl" id="asd" var="role" value="#{user.roles}">
+                <p:column>
+                    <h:outputText id="as" value="#{msg['role.'+=role.name]}"/>
+                </p:column>
+            </h:dataTable>
+        </p:column>
+
+    </p:dataTable>
+
+    <p:commandButton id="add-role" value="#{msg['admin.role.add']}"
+                     style="margin-top:5px"
+                     actionListener="#{roleMmt.addRole(userBean.users.target, roleBean.userRole)}"
+                     update="@widgetVar(panel)"/>
+    <p:commandButton id="remove-role" value="#{msg['admin.role.remove']}"
+                     style="margin-top:5px"
+                     actionListener="#{roleMmt.removeRole(userBean.users.target, roleBean.userRole)}"
+                     update="@widgetVar(panel)"/>
+-->
+
+</ui:composition>
