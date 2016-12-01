@@ -41,9 +41,9 @@ public class EmailServiceImpl extends AbstractMappingService implements EmailSer
             /*message.setText("Gratulálunk a sikeres regisztrációdhoz," +lastname+" "+firstname
                     + "!\n Ha bármilyen jellegű kérdésed merülne fel a szoftver használatával kérjük írj üzenetet az alábbi címre:" +
                     "\n\n\nde.ik.ejournal@gmail.com");*/
-            message.setContent("<b><font size=\"5\">Gratulálunk a sikeres regisztrációdhoz "+lastname +" "+ firstname +
+            message.setContent("<b><font size=\"5\">Gratulálunk a sikeres regisztrációdhoz "+firstname +" "+ lastname +
                     " ! </font> <br><br>Ha bármilyen kérdésed merülne fel a szoftver használatával kapcsolatban kérjük írj üzenetet az alábbi címre:<br>" +
-                    "<br> E-mail: <font color=\"blue\">de.ik.ejournal@gmail.com</font> </b>)", "text/html");
+                    "<br> E-mail: <font color=\"blue\">de.ik.ejournal@gmail.com</font> </b>", "text/html");
 
             Transport.send(message);
 
