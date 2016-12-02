@@ -25,11 +25,11 @@ public class MBTeacher implements Serializable {
     @EJB
     private TeacherService teacherService;
 
-    private TeacherVo teacher;
+    private TeacherVo teacher = new TeacherVo();
 
     @PostConstruct
-    public void init(){
-        teacher = new TeacherVo();
+    public void init() {
+
         teacher.setUser(new UserVo());
 
         List<TeacherVo> teacherSource = new ArrayList<>();
@@ -37,6 +37,7 @@ public class MBTeacher implements Serializable {
 
         teacherSource = teacherService.getAllTeachers();
         teachers = new DualListModel<TeacherVo>(teacherSource, teacherTarget);
+
     }
 
     public TeacherVo getTeacher() {
@@ -62,4 +63,5 @@ public class MBTeacher implements Serializable {
     public void setTeacherService(TeacherService teacherService) {
         this.teacherService = teacherService;
     }
+
 }

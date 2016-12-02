@@ -2,6 +2,7 @@ package hu.inf.unideb.rft.ejournal.vo;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class TeacherVo implements Serializable {
 
@@ -11,7 +12,7 @@ public class TeacherVo implements Serializable {
 
     private UserVo user;
 
-    private SubjectVo subject;
+    private List<SubjectVo> subject;
 
     public UserVo getUser() {
         return user;
@@ -29,12 +30,11 @@ public class TeacherVo implements Serializable {
         this.id = id;
     }
 
-    public SubjectVo getSubject() {
+    public List<SubjectVo> getSubject() {
         return subject;
     }
 
-    public void setSubject(SubjectVo subject) {
+    public void setSubject(List<SubjectVo> subject) {
         this.subject = subject;
     }
-
 }

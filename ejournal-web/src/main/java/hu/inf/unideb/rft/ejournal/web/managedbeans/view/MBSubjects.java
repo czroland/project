@@ -18,6 +18,7 @@ public class MBSubjects implements Serializable {
     private static final long serialVersionUID = -8998031697769938851L;
 
     private List<SubjectVo> subjects = new ArrayList<>();
+    private SubjectVo subject;
 
     @EJB
     SubjectService subjectService;
@@ -46,4 +47,13 @@ public class MBSubjects implements Serializable {
     public void setSubjectService(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
+
+    public SubjectVo getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectVo subject) {
+        this.subject = subject;
+    }
 }
+

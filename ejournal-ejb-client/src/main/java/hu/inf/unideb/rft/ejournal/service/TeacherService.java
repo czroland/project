@@ -1,6 +1,7 @@
 package hu.inf.unideb.rft.ejournal.service;
 
 
+import hu.inf.unideb.rft.ejournal.vo.SubjectVo;
 import hu.inf.unideb.rft.ejournal.vo.TeacherVo;
 import hu.inf.unideb.rft.ejournal.vo.UserVo;
 
@@ -14,4 +15,7 @@ public interface TeacherService {
 
     TeacherVo getTeacherbyId(Long id);
 
+    void addSubjectToUser(Long id, SubjectVo subjectVo);
+
+    void removeSubjectFromUser(Long id, SubjectVo subjectVo);
 }
