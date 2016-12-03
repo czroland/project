@@ -7,17 +7,9 @@ public class ClassVo implements Serializable {
 
     private static final long serialVersionUID = -3771609845703002746L;
 
-    private TeacherVo teacher;
-
     private String year;
 
-    public TeacherVo getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(TeacherVo teacher) {
-        this.teacher = teacher;
-    }
+    private String name;
 
     public String getYear() {
         return year;
@@ -25,5 +17,13 @@ public class ClassVo implements Serializable {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

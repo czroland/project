@@ -8,9 +8,7 @@ public class Class extends BaseEntity {
 
     private String year;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    private String name;
 
     public String getYear() {
         return year;
@@ -20,11 +18,11 @@ public class Class extends BaseEntity {
         this.year = year;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public String getName() {
+        return name;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setName(String name) {
+        this.name = name;
     }
 }

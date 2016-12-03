@@ -144,22 +144,50 @@
                                 />
 
                                 <p:dataTable id="subjects" var="s" value="#{subjectBean.subjects}"
-                                                 rowKey="#{s.name}"
-                                                 style="margin-bottom:0"
-                                                 rows="20"
-                                                 paginator="true"
-                                                 paginatorPosition="bottom"
-                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate="15, 20, 50">
-                                        <p:column headerText="#{msg['subject']}" sortBy="#{s.name}">
-                                            <h:outputText value="#{s.name}"/>
-                                        </p:column>
-                                    </p:dataTable>
+                                             rowKey="#{s.name}"
+                                             style="margin-bottom:0"
+                                             rows="20"
+                                             paginator="true"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="15, 20, 50">
+                                    <p:column headerText="#{msg['subject']}" sortBy="#{s.name}">
+                                        <h:outputText value="#{s.name}"/>
+                                    </p:column>
+                                </p:dataTable>
                             </p:panelGrid>
                         </h:panelGroup>
                     </h:form>
                 </p:tab>
 
+
+                <p:tab title="#{msg['classes']}">
+                    <h:form>
+                        <h:panelGroup id="panel4">
+                            <p:panelGrid columns="2" layout="grid">
+
+                                <p:outputLabel for="name" value="#{msg['class']}:"/>
+                                <p:inputText id="name" value="#{classBean.classVo.name}" required="true"/>
+
+                                <p:outputLabel for="year" value="#{msg['year']}:"/>
+                                <p:inputText id="year" value="#{classBean.classVo.year}" required="true"/>
+
+                                <p:commandButton id="create-class" value="#{msg['admin.role.add']}"
+                                                 style="margin-top:5px"
+                                                 oncomplete="PF('classDialog').show()"
+                                                 action="#{createClassBean.doCreate}"
+                                />
+
+                                <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="classDialog"
+                                          header="#{msg['class.created']}">
+                                    <h:panelGrid id="displayActive" columns="1">
+                                        <h:outputText value="#{msg['class.created']}" style="margin-left:5px"/>
+                                    </h:panelGrid>
+                                </p:dialog>
+                            </p:panelGrid>
+                        </h:panelGroup>
+                    </h:form>
+                </p:tab>
             </p:tabView>
         </p:panel>
 

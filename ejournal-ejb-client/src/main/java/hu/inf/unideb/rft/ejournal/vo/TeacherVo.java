@@ -12,6 +12,8 @@ public class TeacherVo implements Serializable {
 
     private UserVo user;
 
+    private ClassVo classVo;
+
     private List<SubjectVo> subject;
 
     public UserVo getUser() {
@@ -36,5 +38,13 @@ public class TeacherVo implements Serializable {
 
     public void setSubject(List<SubjectVo> subject) {
         this.subject = subject;
+    }
+
+    public ClassVo getClassVo() {
+        return classVo;
+    }
+
+    public void setClassVo(ClassVo classVo) {
+        this.classVo = classVo;
     }
 }

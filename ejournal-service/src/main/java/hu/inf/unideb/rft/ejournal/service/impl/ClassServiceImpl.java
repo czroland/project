@@ -9,6 +9,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.List;
 
 @Stateless(name = "ClassService", mappedName = "ClassService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -24,5 +25,10 @@ public class ClassServiceImpl extends AbstractMappingService implements ClassSer
     public void createClass(ClassVo classVo) {
         classRepository.save(map(classVo, Class.class));
 
+    }
+
+    @Override
+    public List<ClassVo> getAllClasses() {
+        return map(classRepository.findAll(), ClassVo.class);
     }
 }
