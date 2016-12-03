@@ -20,6 +20,9 @@ public class MBSubjectManagement {
     @ManagedProperty(value = "#{teacherBean}")
     private MBTeacher teacher;
 
+    @ManagedProperty(value = "#{subjectBean}")
+    private MBSubjects subjects;
+
     @EJB
     private TeacherService teacherService;
     @EJB
@@ -39,6 +42,13 @@ public class MBSubjectManagement {
             teacherService.removeSubjectFromUser(teacherVo.getId(), subjectVo);
         }
         teacher.init();
+    }
+
+    public void addNewSubject(String name){
+        SubjectVo s = new SubjectVo();
+        s.setName(name);
+        subjectService.saveSubject(s);
+        subjects.init();
     }
 
     public MBTeacher getTeacher() {
@@ -63,5 +73,13 @@ public class MBSubjectManagement {
 
     public void setSubjectService(SubjectService subjectService) {
         this.subjectService = subjectService;
+    }
+
+    public MBSubjects getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(MBSubjects subjects) {
+        this.subjects = subjects;
     }
 }

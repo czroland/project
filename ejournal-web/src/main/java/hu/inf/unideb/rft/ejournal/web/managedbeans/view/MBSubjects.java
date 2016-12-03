@@ -19,6 +19,7 @@ public class MBSubjects implements Serializable {
 
     private List<SubjectVo> subjects = new ArrayList<>();
     private SubjectVo subject;
+    private String newSubject;
 
     @EJB
     SubjectService subjectService;
@@ -54,6 +55,14 @@ public class MBSubjects implements Serializable {
 
     public void setSubject(SubjectVo subject) {
         this.subject = subject;
+    }
+
+    public String getNewSubject() {
+        return newSubject;
+    }
+
+    public void setNewSubject(String newSubject) {
+        this.newSubject = newSubject;
     }
 }
 
