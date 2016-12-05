@@ -13,10 +13,11 @@ import java.util.Properties;
 @Local(EmailService.class)
 public class EmailServiceImpl extends AbstractMappingService implements EmailService{
 
+    final static String username = "de.ik.ejournal@gmail.com";
+    final static String password = "ejournal";
+
     @Override
-    public void sendMessage(String to, String firstname, String lastname) {
-        final String username = "de.ik.ejournal@gmail.com";
-        final String password = "ejournal";
+    public Session emailProps() {
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
@@ -27,27 +28,66 @@ public class EmailServiceImpl extends AbstractMappingService implements EmailSer
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
+                        return new PasswordAuthentication(EmailServiceImpl.username, EmailServiceImpl.password);
                     }
                 });
+        return session;
+    }
+
+    @Override
+    public void sendMessage(String to, String firstname, String lastname) {
 
         try {
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("de.ik.ejournal@gmail.com"));
+            Message message = new MimeMessage(emailProps());
+            message.setFrom(new InternetAddress(EmailServiceImpl.username));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject("Enapló sikeres Regisztráció!");
-            /*message.setText("Gratulálunk a sikeres regisztrációdhoz," +lastname+" "+firstname
-                    + "!\n Ha bármilyen jellegű kérdésed merülne fel a szoftver használatával kérjük írj üzenetet az alábbi címre:" +
-                    "\n\n\nde.ik.ejournal@gmail.com");*/
             message.setContent("<b><font size=\"5\">Gratulálunk a sikeres regisztrációdhoz "+firstname +" "+ lastname +
                     " ! </font> <br><br>Ha bármilyen kérdésed merülne fel a szoftver használatával kapcsolatban kérjük írj üzenetet az alábbi címre:<br>" +
                     "<br> E-mail: <font color=\"blue\">de.ik.ejournal@gmail.com</font> </b>", "text/html");
 
             Transport.send(message);
 
-            System.out.println("Succesfully sent email!");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void passwordReset(String to, String password, String firstname, String lastname) {
+        try {
+
+            Message message = new MimeMessage(emailProps());
+            message.setFrom(new InternetAddress(EmailServiceImpl.username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
+            message.setSubject("Enapló jelszó resetelése (rendszer által generálva)");
+            message.setContent("<b><font size=\"5\">Tisztelt "+firstname +" "+ lastname +
+                    " ! </font> <br><br>Megújult jelszavad: <font color=\"red\">"+password+"</font><br>" +
+                    "<br><font size=\"5\">Kérjük, hogy biztonsági okok miatt változtassa meg a jelszavát!</font> </b>", "text/html");
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void passwordChange(String to, String password, String firstname, String lastname) {
+        try {
+
+            Message message = new MimeMessage(emailProps());
+            message.setFrom(new InternetAddress(EmailServiceImpl.username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
+            message.setSubject("Enapló jelszó megváltoztatása (felhasználó által)");
+            message.setContent("<b><font size=\"5\">Tisztelt "+firstname +" "+ lastname +
+                    " ! </font> <br><br>Az általad módosított új jelszó: <font color=\"green\">"+password+"</font>", "text/html");
+
+            Transport.send(message);
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);

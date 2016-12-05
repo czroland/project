@@ -1,7 +1,12 @@
 package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 
+import hu.inf.unideb.rft.ejournal.service.EmailService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
 import hu.inf.unideb.rft.ejournal.vo.UserVo;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -15,14 +20,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ResourceBundle;
 
-@ManagedBean(name="loginBean")
+@ManagedBean(name="passwordOperations")
 @RequestScoped
-public class MBLogin {
+public class MBPasswordOperations {
 
     @EJB
     private UserService userService;
+
+    @EJB
+    private EmailService emailService;
 
     @ManagedProperty("#{msg}")
     private ResourceBundle bundle;
@@ -31,7 +41,9 @@ public class MBLogin {
 
     private String password;
 
-    public String login() throws ServletException, IOException {
+    private String newpassword;
+
+    public String newGeneratedPassword() throws ServletException, IOException {
 
         UserVo user = userService.getUserByName(username);
         if (user == null) {
@@ -41,15 +53,22 @@ public class MBLogin {
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
         }
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = facesContext.getExternalContext();
-        RequestDispatcher dispatcher = ((ServletRequest)externalContext.getRequest()).getRequestDispatcher("/login");
-        dispatcher.forward((ServletRequest) externalContext.getRequest(), (ServletResponse) externalContext.getResponse());
-        facesContext.responseComplete();
+
+
+        user.setPassword(new BigInteger(30, new SecureRandom()).toString(32));
+        emailService.passwordReset(user.getEmail(),user.getPassword(),user.getFirstName(),user.getLastName());
+        PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userService.saveUser(user);
         return null;
     }
 
-    public String logout() throws IOException, ServletException {
+    public String modifyPassword() throws ServletException, IOException {
+        User uservo = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo user = getUserService().getUserByName(uservo.getUsername());
+        PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(bCryptPasswordEncoder.encode(newpassword));
+        emailService.passwordChange(user.getEmail(),newpassword,user.getFirstName(),user.getLastName());
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
@@ -60,6 +79,7 @@ public class MBLogin {
                 (ServletResponse) externalContext.getResponse());
 
         FacesContext.getCurrentInstance().responseComplete();
+
         return null;
     }
 
@@ -93,5 +113,13 @@ public class MBLogin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNewpassword() {
+        return newpassword;
+    }
+
+    public void setNewpassword(String newpassword) {
+        this.newpassword = newpassword;
     }
 }
