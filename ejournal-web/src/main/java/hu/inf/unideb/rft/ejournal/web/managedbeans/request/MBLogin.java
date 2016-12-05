@@ -49,20 +49,6 @@ public class MBLogin {
         return null;
     }
 
-    public String logout() throws IOException, ServletException {
-
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-
-        RequestDispatcher dispatcher = ((ServletRequest) externalContext.getRequest())
-                .getRequestDispatcher("/logout");
-
-        dispatcher.forward((ServletRequest) externalContext.getRequest(),
-                (ServletResponse) externalContext.getResponse());
-
-        FacesContext.getCurrentInstance().responseComplete();
-        return null;
-    }
-
     public UserService getUserService() {
         return userService;
     }

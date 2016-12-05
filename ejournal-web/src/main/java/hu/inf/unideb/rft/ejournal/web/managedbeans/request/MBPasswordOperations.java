@@ -69,8 +69,11 @@ public class MBPasswordOperations {
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(newpassword));
         emailService.passwordChange(user.getEmail(),newpassword,user.getFirstName(),user.getLastName());
+        userService.saveUser(user);
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+        externalContext.redirect("/../ejournal/login.xhtml");
 
         RequestDispatcher dispatcher = ((ServletRequest) externalContext.getRequest())
                 .getRequestDispatcher("/logout");
@@ -79,7 +82,7 @@ public class MBPasswordOperations {
                 (ServletResponse) externalContext.getResponse());
 
         FacesContext.getCurrentInstance().responseComplete();
-
+        //ec.redirect(ec.getRequestContextPath() + "/home.xhtml");
         return null;
     }
 

@@ -13,7 +13,7 @@
                                 access="hasRole('ADMIN')"/>
 
         <security:form-login login-page="/login.xhtml"
-                             login-processing-url="/login" default-target-url="/index.xhtml"
+                             login-processing-url="/login" default-target-url="/login.xhtml"
                              authentication-failure-url="/login.xhtml"
                              username-parameter="username" password-parameter="password"/>
         <security:logout logout-url="/logout"
