@@ -34,7 +34,8 @@
                         <p:menuitem value="#{msg['student']}" url="/../" icon="fa fa-book"/>
                         <p:menuitem value="#{msg['parent']}" url="/../" icon="fa fa-users"/>
                         <p:menuitem value="Admin" url="/../" icon="fa fa-lock"/>
-                        <p:menuitem value="Admin" url="/../" icon="fa fa-lock"/>
+                        <p:menuitem rendered="#{facesContext.externalContext.userPrincipal == null}" value="#{msg['login']}" url="/../ejournal/login.xhtml" icon="fa fa-spinner fa-pulse"/>
+                        <p:menuitem rendered="#{facesContext.externalContext.userPrincipal != null}" value="#{msg['logout']}" url="/../ejournal/logout" icon="fa fa-spinner fa-pulse"/>
                     </p:menubar>
                 </h:form>
             </div>
