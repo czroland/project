@@ -14,7 +14,6 @@
             <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}">
                 <ui:include src="WEB-INF/includes/login.xhtml"/>
                 <ui:include src="WEB-INF/includes/login-form.xhtml"/>
-                <ui:include src="WEB-INF/includes/login-forgotpassword.xhtml"/>
             </p:panel>
 
             <p:outputLabel rendered="#{facesContext.externalContext.userPrincipal != null}"

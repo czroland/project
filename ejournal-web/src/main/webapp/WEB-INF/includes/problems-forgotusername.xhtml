@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:form id="problems-username" prependId="false">
+
+        <div>
+            <p:outputLabel value="#{msg['login.forgot.username']}&#160;"/>
+        </div>
+
+        <p:panelGrid columns="2" layout="grid">
+
+
+            <p:outputLabel for="emailadress" value="#{msg['login.emailadress']}"/>
+            <p:inputText id="emailadress" value="#{passwordOperations.emailadress}" required="true"
+                         requiredMessage="#{msg['login.email.req']}"/>
+
+        </p:panelGrid>
+        <h:commandButton type="submit" id="problems-forgotusernamebutton" value="#{msg['login.usernamerequest']}" action="#{passwordOperations.sendUsername}"/>
+        <ui:param name="logged-in3" value=""/>
+
+    </h:form>
+</ui:composition>
