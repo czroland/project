@@ -31,4 +31,13 @@ public class ClassServiceImpl extends AbstractMappingService implements ClassSer
     public List<ClassVo> getAllClasses() {
         return map(classRepository.findAll(), ClassVo.class);
     }
+
+    @Override
+    public ClassVo getClassById(Long id) {
+        Class aClass = classRepository.findOne(id);
+        if (aClass != null) {
+            return map(aClass, ClassVo.class);
+        }
+        return null;
+    }
 }

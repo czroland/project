@@ -7,6 +7,8 @@ public class ClassVo implements Serializable {
 
     private static final long serialVersionUID = -3771609845703002746L;
 
+    private Long id;
+
     private String year;
 
     private String name;
@@ -25,5 +27,38 @@ public class ClassVo implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        ClassVo classVo = (ClassVo) o;
+
+        if (!id.equals(classVo.id)) {
+            return false;
+        }
+        return name.equals(classVo.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
     }
 }

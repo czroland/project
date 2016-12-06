@@ -20,14 +20,20 @@ public class MBClass implements Serializable {
     @EJB
     ClassService classService;
 
-    ClassVo classVo = new ClassVo();
+    ClassVo classVo;
 
     private List<ClassVo> classes = new ArrayList<>();
 
     @PostConstruct
     void init(){
+        classVo=new ClassVo();
         classes = classService.getAllClasses();
     }
+
+    public ClassVo findClassById(Long id) {
+        return classService.getClassById(id);
+    }
+
 
     public ClassService getClassService() {
         return classService;

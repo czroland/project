@@ -11,4 +11,6 @@ public interface ClassService {
 
     List<ClassVo> getAllClasses();
 
+    ClassVo getClassById(Long id);
+
 }

@@ -167,21 +167,24 @@
                             <p:panelGrid columns="2" layout="grid">
 
                                 <p:outputLabel for="name" value="#{msg['class']}:"/>
-                                <p:inputText id="name" value="#{classBean.classVo.name}" required="true"/>
+                                <p:inputText id="name" value="#{classBean.classVo.name}" required="true" requiredMessage="REQ"/>
 
                                 <p:outputLabel for="year" value="#{msg['year']}:"/>
-                                <p:inputText id="year" value="#{classBean.classVo.year}" required="true"/>
+                                <p:inputText id="year" value="#{classBean.classVo.year}" required="true" requiredMessage="REQ"/>
 
                                 <p:commandButton id="create-class" value="#{msg['admin.role.add']}"
                                                  style="margin-top:5px"
-                                                 oncomplete="PF('classDialog').show()"
                                                  action="#{createClassBean.doCreate}"
+                                                 onsuccess="PF('classDialog').show()"
+                                                 update="panel4"
                                 />
 
                                 <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="classDialog"
                                           header="#{msg['class.created']}">
                                     <h:panelGrid id="displayActive" columns="1">
                                         <h:outputText value="#{msg['class.created']}" style="margin-left:5px"/>
+                                        <h:outputText value="#{classBean.classVo.name}" style="margin-left:5px"/>
+
                                     </h:panelGrid>
                                 </p:dialog>
                             </p:panelGrid>

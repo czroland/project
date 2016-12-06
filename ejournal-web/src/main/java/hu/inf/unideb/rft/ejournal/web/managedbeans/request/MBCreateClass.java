@@ -27,7 +27,7 @@ public class MBCreateClass {
     @EJB
     ClassService classService;
 
-    public void doCreate()
+    public String doCreate()
     {
         classService.createClass(mbClass.getClassVo());
     }

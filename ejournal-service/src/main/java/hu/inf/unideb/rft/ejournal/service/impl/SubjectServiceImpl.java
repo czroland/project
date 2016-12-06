@@ -33,8 +33,7 @@ public class SubjectServiceImpl extends AbstractMappingService implements Subjec
 
     @Override
     public SubjectVo getSubjectbyId(Long id) {
-        Subject subject = null;
-        subject = subjectRepository.findOne(id);
+        Subject subject = subjectRepository.findOne(id);
         if (subject != null) {
             return map(subject, SubjectVo.class);
         }
