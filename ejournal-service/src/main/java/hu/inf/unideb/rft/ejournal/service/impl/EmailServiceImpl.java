@@ -93,4 +93,23 @@ public class EmailServiceImpl extends AbstractMappingService implements EmailSer
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void sendForgotUsername(String to, String username, String firstname, String lastname) {
+        try {
+
+            Message message = new MimeMessage(emailProps());
+            message.setFrom(new InternetAddress(EmailServiceImpl.username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
+            message.setSubject("Enapló felhasználónév emlékeztető.");
+            message.setContent("<b><font size=\"5\">Tisztelt "+firstname +" "+ lastname +
+                    " ! </font> <br><br>Az e-mail címedhez tartozó felhasználónév: <font color=\"green\">"+username+"</font>", "text/html");
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -37,6 +37,8 @@ public class MBPasswordOperations {
     @ManagedProperty("#{msg}")
     private ResourceBundle bundle;
 
+    private String emailadress;
+
     private String username;
 
     private String password;
@@ -86,6 +88,19 @@ public class MBPasswordOperations {
         return null;
     }
 
+    public String sendUsername(){
+        UserVo user = userService.getUserByEmail(emailadress);
+        if (user == null) {
+            FacesMessage msg = new FacesMessage();
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            msg.setSummary(bundle.getString("login.email.null"));
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return null;
+        }
+        emailService.sendForgotUsername(user.getEmail(),user.getName(),user.getFirstName(),user.getLastName());
+        return null;
+    }
+
     public UserService getUserService() {
         return userService;
     }
@@ -124,5 +139,13 @@ public class MBPasswordOperations {
 
     public void setNewpassword(String newpassword) {
         this.newpassword = newpassword;
+    }
+
+    public String getEmailadress() {
+        return emailadress;
+    }
+
+    public void setEmailadress(String emailadress) {
+        this.emailadress = emailadress;
     }
 }

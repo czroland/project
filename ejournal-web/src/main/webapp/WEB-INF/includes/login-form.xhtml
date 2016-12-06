@@ -20,5 +20,9 @@
         <h:commandButton type="submit" id="login-button" value="#{msg['login']}" action="#{loginBean.login}"/>
         <ui:param name="logged-in" value=""/>
 
+        <div>
+            <p:link href="/../ejournal/problems.xhtml" value="#{msg['login.problems']}"/>
+        </div>
+
     </h:form>
 </ui:composition>

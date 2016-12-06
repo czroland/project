@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="WEB-INF/templates/template.xhtml">
+    <ui:define name="title">
+        #{msg['login.title']}
+    </ui:define>
+
+    <ui:define name="body">
+
+        <div class="text-center">
+            <p:panel>
+                <ui:include src="WEB-INF/includes/problems-forgotpassword.xhtml"/>
+                <ui:include src="WEB-INF/includes/problems-forgotusername.xhtml"/>
+            </p:panel>
+        </div>
+
+        <p:messages showSummary="true" showDetail="false"/>
+
+    </ui:define>
+</ui:composition>
+</html>
