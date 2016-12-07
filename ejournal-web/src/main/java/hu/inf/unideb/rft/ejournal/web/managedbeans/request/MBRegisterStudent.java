@@ -5,8 +5,10 @@ import hu.inf.unideb.rft.ejournal.service.ParentService;
 import hu.inf.unideb.rft.ejournal.service.RoleService;
 import hu.inf.unideb.rft.ejournal.service.StudentService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
+import hu.inf.unideb.rft.ejournal.vo.ClassVo;
 import hu.inf.unideb.rft.ejournal.vo.RoleVo;
 import hu.inf.unideb.rft.ejournal.service.EmailService;
+import hu.inf.unideb.rft.ejournal.vo.StudentVo;
 import hu.inf.unideb.rft.ejournal.web.enums.Roles;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBStudent;
 import org.primefaces.event.FlowEvent;
@@ -17,6 +19,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.util.List;
 
 @ManagedBean(name = "registerStudent")
 @RequestScoped
@@ -66,6 +69,23 @@ public class MBRegisterStudent {
         email.sendMessage(student.getStudent().getUser().getEmail(),student.getStudent().getUser().getFirstName(),student.getStudent().getUser().getLastName());
         email.sendMessage(student.getStudent().getParent().getUser().getEmail(),student.getStudent().getParent().getUser().getFirstName(),student.getStudent().getParent().getUser().getLastName());
         return "200";
+    }
+
+    public void addClass(List<StudentVo> students, ClassVo classVo) {
+
+        for (StudentVo studentVo : students) {
+            studentService.addClassToStudent(studentVo.getId(), classVo);
+        }
+        student.init();
+    }
+
+    public void removeClass(List<StudentVo> students, ClassVo classVo) {
+
+
+        for (StudentVo studentVo : students) {
+            studentService.removeClassFromStudent(studentVo.getId(), classVo);
+        }
+        student.init();
     }
 
     RoleVo role(String role){

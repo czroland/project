@@ -1,9 +1,11 @@
 package hu.inf.unideb.rft.ejournal.service.impl;
 
 
+import hu.inf.unideb.rft.ejournal.persistence.entity.Class;
 import hu.inf.unideb.rft.ejournal.persistence.entity.Student;
 import hu.inf.unideb.rft.ejournal.persistence.repository.StudentRepository;
 import hu.inf.unideb.rft.ejournal.service.StudentService;
+import hu.inf.unideb.rft.ejournal.vo.ClassVo;
 import hu.inf.unideb.rft.ejournal.vo.StudentVo;
 import hu.inf.unideb.rft.ejournal.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +69,18 @@ public class StudentServiceImpl extends AbstractMappingService implements Studen
     @Override
     public StudentVo getStudentByPhonenumber(Number Phonenumber) {
         return null;
+    }
+
+    @Override
+    public void addClassToStudent(Long id, ClassVo classVo) {
+        if (studentRepository.findById(id).getAclass().equals(null))
+        studentRepository.findById(id).setAclass(map(classVo, Class.class));
+    }
+
+    @Override
+    public void removeClassFromStudent(Long id, ClassVo classVo) {
+        if (!studentRepository.findById(id).getAclass().equals(null))
+            studentRepository.findById(id).setAclass(null);
     }
 }
 
