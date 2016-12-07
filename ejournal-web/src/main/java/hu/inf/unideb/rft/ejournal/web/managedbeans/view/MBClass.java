@@ -22,13 +22,18 @@ public class MBClass implements Serializable {
     @EJB
     ClassService classService;
 
-    ClassVo classVo = new ClassVo();
+    private ClassVo classVo;
+    private ClassVo classVoForStudents;
+
 
     private DualListModel<ClassVo> classes;
 
+    private List<ClassVo> classSource = new ArrayList<>();
+
     @PostConstruct
     public void init() {
-        List<ClassVo> classSource = new ArrayList<>();
+        classVo= new ClassVo();
+       // List<ClassVo> classSource = new ArrayList<>();
         List<ClassVo> classTarget = new ArrayList<>();
 
         classSource = classService.getAllClasses();
@@ -63,5 +68,21 @@ public class MBClass implements Serializable {
 
     public void setClasses(DualListModel<ClassVo> classes) {
         this.classes = classes;
+    }
+
+    public List<ClassVo> getClassSource() {
+        return classSource;
+    }
+
+    public void setClassSource(List<ClassVo> classSource) {
+        this.classSource = classSource;
+    }
+
+    public ClassVo getClassVoForStudents() {
+        return classVoForStudents;
+    }
+
+    public void setClassVoForStudents(ClassVo classVoForStudents) {
+        this.classVoForStudents = classVoForStudents;
     }
 }

@@ -177,7 +177,6 @@
                                 <p:commandButton id="create-class" value="#{msg['admin.role.add']}"
                                                  style="margin-top:5px"
                                                  action="#{createClassBean.doCreate}"
-                                                 onsuccess="PF('classDialog').show()"
                                                  update="panel4"
                                 />
 
@@ -250,6 +249,70 @@
                                              action="#{createClassBean.removeSubject(classBean.classes.target, subjectBean.subject)}"
                                              update="panel5"
                             />
+                        </h:panelGroup>
+                    </h:form>
+                </p:tab>
+
+                <p:tab title="#{msg['classes']}">
+                    <h:form>
+                        <h:panelGroup id="panel6">
+                            <p:panelGrid columns="1" layout="grid">
+
+                                <p:panelGrid columns="2" layout="grid">
+
+                                    <h:outputLabel for="class" value="#{msg['subject']}: *"/>
+                                    <p:selectOneMenu id="class" required="true"
+                                                     value="#{classBean.classVoForStudents}" converter="classVoConverter"
+                                                     requiredMessage="#{msg['subj.reg']}">
+                                        <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                                        <f:selectItems value="#{classBean.classSource}" var="class"
+                                                       itemLabel="#{class.name}" itemValue="#{class}"/>
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+
+                                <p:dataTable widgetVar="ppp" id="students" var="student"
+                                             value="#{studentBean.students.source}"
+                                             selection="#{studentBean.students.target}" rowKey="#{student.id}"
+                                             style="margin-bottom:0"
+                                             rows="20"
+                                             paginator="true"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="15, 20, 50">
+
+                                    <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+
+                                    <p:column headerText="#{msg['validator.uname']}" sortBy="#{student.user.name}">
+                                        <h:outputText value="#{student.user.name}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['fname']}" sortBy="#{student.user.firstName}">
+                                        <h:outputText value="#{student.user.firstName}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['lname']}" sortBy="#{student.user.lastName}">
+                                        <h:outputText value="#{student.user.lastName}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['subject']}">
+                                                <h:outputText value="#{student.aclass.name}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['subject']}">
+                                        <h:outputText value="#{student.aclass.year}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+
+
+                                <p:commandButton id="add-class" value="#{msg['admin.role.add']}"
+                                                 style="margin-top:5px"
+                                                 action="#{registerStudent.addClass(studentBean.students.target,classBean.classVoForStudents)}"
+                                                 update="panel6"
+                                />
+
+
+                            </p:panelGrid>
                         </h:panelGroup>
                     </h:form>
                 </p:tab>
