@@ -2,6 +2,8 @@ package hu.inf.unideb.rft.ejournal.web.managedbeans.view;
 
 import hu.inf.unideb.rft.ejournal.service.ClassService;
 import hu.inf.unideb.rft.ejournal.vo.ClassVo;
+import hu.inf.unideb.rft.ejournal.vo.TeacherVo;
+import org.primefaces.model.DualListModel;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -20,20 +22,24 @@ public class MBClass implements Serializable {
     @EJB
     ClassService classService;
 
-    ClassVo classVo;
+    ClassVo classVo = new ClassVo();
 
-    private List<ClassVo> classes = new ArrayList<>();
+    private DualListModel<ClassVo> classes;
 
     @PostConstruct
-    void init(){
-        classVo=new ClassVo();
-        classes = classService.getAllClasses();
+    public void init() {
+        List<ClassVo> classSource = new ArrayList<>();
+        List<ClassVo> classTarget = new ArrayList<>();
+
+        classSource = classService.getAllClasses();
+
+        classes = new DualListModel<ClassVo>(classSource, classTarget);
+
     }
 
     public ClassVo findClassById(Long id) {
         return classService.getClassById(id);
     }
-
 
     public ClassService getClassService() {
         return classService;
@@ -51,11 +57,11 @@ public class MBClass implements Serializable {
         this.classVo = classVo;
     }
 
-    public List<ClassVo> getClasses() {
+    public DualListModel<ClassVo> getClasses() {
         return classes;
     }
 
-    public void setClasses(List<ClassVo> classes) {
+    public void setClasses(DualListModel<ClassVo> classes) {
         this.classes = classes;
     }
 }

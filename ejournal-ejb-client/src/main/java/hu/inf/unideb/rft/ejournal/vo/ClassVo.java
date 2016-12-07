@@ -2,6 +2,7 @@ package hu.inf.unideb.rft.ejournal.vo;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ClassVo implements Serializable {
 
@@ -12,6 +13,8 @@ public class ClassVo implements Serializable {
     private String year;
 
     private String name;
+
+    private List<SubjectVo> subjects;
 
     public String getYear() {
         return year;
@@ -35,6 +38,14 @@ public class ClassVo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<SubjectVo> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<SubjectVo> subjects) {
+        this.subjects = subjects;
     }
 
     @Override

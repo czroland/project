@@ -27,6 +27,7 @@ public class MBSubjects implements Serializable {
     @PostConstruct
     public void init() {
         subjects = subjectService.getAllSubjects();
+        newSubject = null;
     }
 
     public SubjectVo findSubjectById(Long id) {

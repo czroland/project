@@ -3,6 +3,8 @@ package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 import hu.inf.unideb.rft.ejournal.service.ClassService;
 import hu.inf.unideb.rft.ejournal.service.RoleService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
+import hu.inf.unideb.rft.ejournal.vo.ClassVo;
+import hu.inf.unideb.rft.ejournal.vo.SubjectVo;
 import hu.inf.unideb.rft.ejournal.vo.UserVo;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBClass;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBUser;
@@ -30,6 +32,25 @@ public class MBCreateClass {
     public void doCreate()
     {
         classService.createClass(mbClass.getClassVo());
+        mbClass.getClassVo().setName(null);
+        mbClass.getClassVo().setYear(null);
+
+    }
+
+    public void addSubject(List<ClassVo> classes, SubjectVo subjectVo) {
+
+        for (ClassVo classVo : classes) {
+            classService.addSubjectToClass(classVo.getId(), subjectVo);
+        }
+        mbClass.init();
+    }
+
+    public void removeSubject(List<ClassVo> classes, SubjectVo subjectVo) {
+
+        for (ClassVo classVo : classes) {
+            classService.removeSubjectFromClass(classVo.getId(), subjectVo);
+        }
+        mbClass.init();
     }
 
     public MBClass getMbClass() {

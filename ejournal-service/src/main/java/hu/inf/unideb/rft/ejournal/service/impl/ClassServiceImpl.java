@@ -1,15 +1,18 @@
 package hu.inf.unideb.rft.ejournal.service.impl;
 
 import hu.inf.unideb.rft.ejournal.persistence.entity.Class;
+import hu.inf.unideb.rft.ejournal.persistence.entity.Subject;
 import hu.inf.unideb.rft.ejournal.persistence.repository.ClassRepository;
 import hu.inf.unideb.rft.ejournal.service.ClassService;
 import hu.inf.unideb.rft.ejournal.vo.ClassVo;
+import hu.inf.unideb.rft.ejournal.vo.SubjectVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless(name = "ClassService", mappedName = "ClassService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -39,5 +42,30 @@ public class ClassServiceImpl extends AbstractMappingService implements ClassSer
             return map(aClass, ClassVo.class);
         }
         return null;
+    }
+
+    @Override
+    public void addSubjectToClass(Long id, SubjectVo subjectVo) {
+        boolean contains = false;
+
+        for (Subject subject : classRepository.findById(id).getSubjects()) {
+            contains = subject.getName().equals(subjectVo.getName());
+            if (contains) break;
+        }
+
+        if (!contains) {
+            classRepository.findById(id).getSubjects().add(map(subjectVo, Subject.class));
+        }
+    }
+
+    @Override
+    public void removeSubjectFromClass(Long id, SubjectVo subjectVo) {
+        List<Subject> newSubjects = classRepository.findById(id)
+                .getSubjects()
+                .stream()
+                .filter(subject -> !(subject.getName().equals(subjectVo.getName())))
+                .collect(Collectors.toList());
+
+        classRepository.findById(id).setSubjects(newSubjects);
     }
 }

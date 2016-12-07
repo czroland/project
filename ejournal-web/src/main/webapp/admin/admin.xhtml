@@ -167,10 +167,12 @@
                             <p:panelGrid columns="2" layout="grid">
 
                                 <p:outputLabel for="name" value="#{msg['class']}:"/>
-                                <p:inputText id="name" value="#{classBean.classVo.name}" required="true" requiredMessage="REQ"/>
+                                <p:inputText id="name" value="#{classBean.classVo.name}" required="true"
+                                             requiredMessage="REQ"/>
 
                                 <p:outputLabel for="year" value="#{msg['year']}:"/>
-                                <p:inputText id="year" value="#{classBean.classVo.year}" required="true" requiredMessage="REQ"/>
+                                <p:inputText id="year" value="#{classBean.classVo.year}" required="true"
+                                             requiredMessage="REQ"/>
 
                                 <p:commandButton id="create-class" value="#{msg['admin.role.add']}"
                                                  style="margin-top:5px"
@@ -188,6 +190,66 @@
                                     </h:panelGrid>
                                 </p:dialog>
                             </p:panelGrid>
+                        </h:panelGroup>
+                    </h:form>
+                </p:tab>
+
+
+                <p:tab title="#{msg['classes']}">
+                    <h:form>
+                        <h:panelGroup id="panel5">
+                            <p:panelGrid columns="1" layout="grid">
+
+                                <h:outputLabel for="subject-classes" value="#{msg['subject']}: *"/>
+                                <p:selectOneMenu id="subject-classes" required="true"
+                                                 value="#{subjectBean.subject}" converter="subjectVoConverter"
+                                                 requiredMessage="#{msg['subj.reg']}">
+                                    <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                                    <f:selectItems value="#{subjectBean.subjects}" var="subject"
+                                                   itemLabel="#{subject.name}" itemValue="#{subject}"/>
+                                </p:selectOneMenu>
+
+                                <p:dataTable id="classes" var="class"
+                                             value="#{classBean.classes.source}"
+                                             selection="#{classBean.classes.target}" rowKey="#{class.id}"
+                                             style="margin-bottom:0"
+                                             rows="20"
+                                             paginator="true"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="15, 20, 50">
+
+                                    <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+
+                                    <p:column headerText="#{msg['subject']}" sortBy="#{class.name}">
+                                        <h:outputText value="#{class.name}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['subject']}" sortBy="#{class.year}">
+                                        <h:outputText value="#{class.year}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['subjects']}">
+                                        <h:dataTable id="sub-teacher" var="subj" value="#{class.subjects}">
+                                            <p:column>
+                                                <h:outputText id="nm" value="#{subj.name}"/>
+                                            </p:column>
+                                        </h:dataTable>
+                                    </p:column>
+
+                                </p:dataTable>
+
+                            </p:panelGrid>
+                            <p:commandButton id="add-subject-to-class" value="#{msg['admin.role.add']}"
+                                             style="margin-top:5px"
+                                             action="#{createClassBean.addSubject(classBean.classes.target, subjectBean.subject)}"
+                                             update="panel5"
+                            />
+                            <p:commandButton id="remove-subject-from-class" value="#{msg['admin.role.remove']}"
+                                             style="margin-top:5px"
+                                             action="#{createClassBean.removeSubject(classBean.classes.target, subjectBean.subject)}"
+                                             update="panel5"
+                            />
                         </h:panelGroup>
                     </h:form>
                 </p:tab>
