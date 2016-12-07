@@ -6,7 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xml:lang="en" lang="en">
+      xml:lang="#{localeBean.locale}" lang="#{localeBean.locale}">
 
 <h:head>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
@@ -16,7 +16,7 @@
 </h:head>
 
 <h:body>
-
+    <f:view locale="#{localeBean.locale}">
     <header class="container-fluid header">
         <div class="row">
             <div class="col-xs-12 col-sm-1 col-md-1">
@@ -37,7 +37,11 @@
                         <p:menuitem rendered="#{facesContext.externalContext.userPrincipal == null}" value="#{msg['login']}" url="/../ejournal/login.xhtml" icon="fa fa-spinner fa-pulse"/>
                         <p:menuitem rendered="#{facesContext.externalContext.userPrincipal != null}" value="#{msg['logout']}" url="/../ejournal/logout" icon="fa fa-spinner fa-pulse"/>
                     </p:menubar>
+                    <p:outputLabel value="#{msg['languages']}"/>
+                    <h:commandButton type="submit" id="hungarian-button" value="#{msg['hungarian']}" action="#{localeBean.setLanguageToHungarian}"/>
+                    <h:commandButton type="submit" id="english-button" value="#{msg['english']}" action="#{localeBean.setLanguageToEnglish}"/>
                 </h:form>
+
             </div>
         </div>
     </header>
@@ -59,5 +63,6 @@
     <footer>
         <span>© 2016 E-journal</span>
     </footer>
+    </f:view>
 </h:body>
 </html>
