@@ -28,18 +28,23 @@
                 <h6 class="welcome-text">#{msg['welcome']}</h6>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4">
-                <h:form>
+                <h:form id="menuForm">
+                    <p:growl id="messages" autoUpdate="true" showDetail="true"/>
                     <p:menubar>
-                        <p:menuitem value="#{msg['teacher']}" url="/../" icon="fa fa-pencil"/>
-                        <p:menuitem value="#{msg['student']}" url="/../" icon="fa fa-book"/>
+                        <p:menuitem value="#{msg['teacher']}" actionListener="#{localeBean.setLanguageToHungarian}" ajax="true" update="messages" icon="fa fa-pencil"/>
+                        <p:menuitem value="#{msg['student']}" actionListener="#{localeBean.setLanguageToEnglish}" ajax="true" update="messages" icon="fa fa-book"/>
                         <p:menuitem value="#{msg['parent']}" url="/../" icon="fa fa-users"/>
                         <p:menuitem value="Admin" url="/../" icon="fa fa-lock"/>
                         <p:menuitem rendered="#{facesContext.externalContext.userPrincipal == null}" value="#{msg['login']}" url="/../ejournal/login.xhtml" icon="fa fa-spinner fa-pulse"/>
                         <p:menuitem rendered="#{facesContext.externalContext.userPrincipal != null}" value="#{msg['logout']}" url="/../ejournal/logout" icon="fa fa-spinner fa-pulse"/>
                     </p:menubar>
                     <p:outputLabel value="#{msg['languages']}"/>
-                    <h:commandButton type="submit" id="hungarian-button" value="#{msg['hungarian']}" action="#{localeBean.setLanguageToHungarian}"/>
-                    <h:commandButton type="submit" id="english-button" value="#{msg['english']}" action="#{localeBean.setLanguageToEnglish}"/>
+                    <p:commandLink actionListener="#{localeBean.setLanguageToHungarian}">
+                        <h:graphicImage name="images/hun.png" height="40" width="40" style="margin-right: 5px"/>
+                    </p:commandLink>
+                    <p:commandLink actionListener="#{localeBean.setLanguageToEnglish}">
+                        <h:graphicImage name="images/en.png" height="40" width="40"/>
+                    </p:commandLink>
                 </h:form>
 
             </div>
