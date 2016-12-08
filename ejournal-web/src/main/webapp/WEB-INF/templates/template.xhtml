@@ -31,8 +31,8 @@
                 <h:form id="menuForm">
                     <p:growl id="messages" autoUpdate="true" showDetail="true"/>
                     <p:menubar>
-                        <p:menuitem value="#{msg['teacher']}" actionListener="#{localeBean.setLanguageToHungarian}" ajax="true" update="messages" icon="fa fa-pencil"/>
-                        <p:menuitem value="#{msg['student']}" actionListener="#{localeBean.setLanguageToEnglish}" ajax="true" update="messages" icon="fa fa-book"/>
+                        <p:menuitem value="#{msg['teacher']}" icon="fa fa-pencil"/>
+                        <p:menuitem value="#{msg['student']}" icon="fa fa-book"/>
                         <p:menuitem value="#{msg['parent']}" url="/../" icon="fa fa-users"/>
                         <p:menuitem value="Admin" url="/../" icon="fa fa-lock"/>
                         <p:menuitem rendered="#{facesContext.externalContext.userPrincipal == null}" value="#{msg['login']}" url="/../ejournal/login.xhtml" icon="fa fa-spinner fa-pulse"/>
