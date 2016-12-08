@@ -73,13 +73,13 @@ public class StudentServiceImpl extends AbstractMappingService implements Studen
 
     @Override
     public void addClassToStudent(Long id, ClassVo classVo) {
-        if (studentRepository.findById(id).getAclass().equals(null))
+        if (studentRepository.findById(id).getAclass() == null)
         studentRepository.findById(id).setAclass(map(classVo, Class.class));
     }
 
     @Override
     public void removeClassFromStudent(Long id, ClassVo classVo) {
-        if (!studentRepository.findById(id).getAclass().equals(null))
+        if (studentRepository.findById(id).getAclass() != null)
             studentRepository.findById(id).setAclass(null);
     }
 }

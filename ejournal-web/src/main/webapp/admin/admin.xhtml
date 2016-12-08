@@ -66,11 +66,11 @@
                     </h:form>
                 </p:tab>
 
-                <p:tab title="#{msg['teachers']}">
+                <p:tab id="teacher" title="#{msg['teachers']}">
                     <h:form>
                         <h:panelGroup id="panel2">
 
-                            <p:panelGrid columns="2" layout="grid">
+                            <p:panelGrid columns="1" layout="grid">
 
                                 <h:outputLabel for="subject" value="#{msg['subject']}: *"/>
                                 <p:selectOneMenu id="subject" required="true"
@@ -80,41 +80,42 @@
                                     <f:selectItems value="#{subjectBean.subjects}" var="subject"
                                                    itemLabel="#{subject.name}" itemValue="#{subject}"/>
                                 </p:selectOneMenu>
+
+                                <p:dataTable widgetVar="ppp" id="teachers" var="teacher"
+                                             value="#{teacherBean.teachers.source}"
+                                             selection="#{teacherBean.teachers.target}" rowKey="#{teacher.id}"
+                                             style="margin-bottom:0"
+                                             rows="20"
+                                             paginator="true"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="15, 20, 50">
+
+                                    <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+
+                                    <p:column headerText="#{msg['validator.uname']}" sortBy="#{teacher.user.name}">
+                                        <h:outputText value="#{teacher.user.name}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['fname']}" sortBy="#{teacher.user.firstName}">
+                                        <h:outputText value="#{teacher.user.firstName}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['lname']}" sortBy="#{teacher.user.lastName}">
+                                        <h:outputText value="#{teacher.user.lastName}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['subjects']}">
+                                        <h:dataTable id="sub" var="subj" value="#{teacher.subject}">
+                                            <p:column>
+                                                <h:outputText id="ts" value="#{subj.name}"/>
+                                            </p:column>
+                                        </h:dataTable>
+                                    </p:column>
+
+                                </p:dataTable>
                             </p:panelGrid>
 
-                            <p:dataTable widgetVar="ppp" id="teachers" var="teacher"
-                                         value="#{teacherBean.teachers.source}"
-                                         selection="#{teacherBean.teachers.target}" rowKey="#{teacher.id}"
-                                         style="margin-bottom:0"
-                                         rows="20"
-                                         paginator="true"
-                                         paginatorPosition="bottom"
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowsPerPageTemplate="15, 20, 50">
-
-                                <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
-
-                                <p:column headerText="#{msg['validator.uname']}" sortBy="#{teacher.user.name}">
-                                    <h:outputText value="#{teacher.user.name}"/>
-                                </p:column>
-
-                                <p:column headerText="#{msg['fname']}" sortBy="#{teacher.user.firstName}">
-                                    <h:outputText value="#{teacher.user.firstName}"/>
-                                </p:column>
-
-                                <p:column headerText="#{msg['lname']}" sortBy="#{teacher.user.lastName}">
-                                    <h:outputText value="#{teacher.user.lastName}"/>
-                                </p:column>
-
-                                <p:column headerText="#{msg['subjects']}">
-                                    <h:dataTable id="sub" var="subj" value="#{teacher.subject}">
-                                        <p:column>
-                                            <h:outputText id="ts" value="#{subj.name}"/>
-                                        </p:column>
-                                    </h:dataTable>
-                                </p:column>
-
-                            </p:dataTable>
 
                             <p:commandButton id="add-subject" value="#{msg['admin.role.add']}"
                                              style="margin-top:5px"
@@ -161,7 +162,7 @@
                 </p:tab>
 
 
-                <p:tab title="#{msg['classes']}">
+                <p:tab title="#{msg['class.create']}">
                     <h:form>
                         <h:panelGroup id="panel4">
                             <p:panelGrid columns="2" layout="grid">
@@ -194,7 +195,7 @@
                 </p:tab>
 
 
-                <p:tab title="#{msg['classes']}">
+                <p:tab title="#{msg['class.add.subj']}">
                     <h:form>
                         <h:panelGroup id="panel5">
                             <p:panelGrid columns="1" layout="grid">
@@ -239,6 +240,7 @@
                                 </p:dataTable>
 
                             </p:panelGrid>
+
                             <p:commandButton id="add-subject-to-class" value="#{msg['admin.role.add']}"
                                              style="margin-top:5px"
                                              action="#{createClassBean.addSubject(classBean.classes.target, subjectBean.subject)}"
@@ -253,24 +255,21 @@
                     </h:form>
                 </p:tab>
 
-                <p:tab title="#{msg['classes']}">
+                <p:tab id="student" title="#{msg['students']}">
                     <h:form>
                         <h:panelGroup id="panel6">
                             <p:panelGrid columns="1" layout="grid">
 
-                                <p:panelGrid columns="2" layout="grid">
+                                <h:outputLabel for="class" value="#{msg['classes']}: *"/>
+                                <p:selectOneMenu id="class" required="true"
+                                                 value="#{classBean.classVoForStudents}" converter="classVoConverter"
+                                                 requiredMessage="#{msg['subj.reg']}">
+                                    <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                                    <f:selectItems value="#{classBean.classSource}" var="class"
+                                                   itemLabel="#{class.name}" itemValue="#{class}"/>
+                                </p:selectOneMenu>
 
-                                    <h:outputLabel for="class" value="#{msg['subject']}: *"/>
-                                    <p:selectOneMenu id="class" required="true"
-                                                     value="#{classBean.classVoForStudents}" converter="classVoConverter"
-                                                     requiredMessage="#{msg['subj.reg']}">
-                                        <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
-                                        <f:selectItems value="#{classBean.classSource}" var="class"
-                                                       itemLabel="#{class.name}" itemValue="#{class}"/>
-                                    </p:selectOneMenu>
-                                </p:panelGrid>
-
-                                <p:dataTable widgetVar="ppp" id="students" var="student"
+                                <p:dataTable id="students" var="student"
                                              value="#{studentBean.students.source}"
                                              selection="#{studentBean.students.target}" rowKey="#{student.id}"
                                              style="margin-bottom:0"
@@ -294,25 +293,29 @@
                                         <h:outputText value="#{student.user.lastName}"/>
                                     </p:column>
 
-                                    <p:column headerText="#{msg['subject']}">
-                                                <h:outputText value="#{student.aclass.name}"/>
+                                    <p:column headerText="#{msg['class']}">
+                                        <h:outputText value="#{student.aclass.name}"/>
                                     </p:column>
 
-                                    <p:column headerText="#{msg['subject']}">
+                                    <p:column headerText="#{msg['year']}">
                                         <h:outputText value="#{student.aclass.year}"/>
                                     </p:column>
 
                                 </p:dataTable>
-
-
-                                <p:commandButton id="add-class" value="#{msg['admin.role.add']}"
-                                                 style="margin-top:5px"
-                                                 action="#{registerStudent.addClass(studentBean.students.target,classBean.classVoForStudents)}"
-                                                 update="panel6"
-                                />
-
-
                             </p:panelGrid>
+
+
+                            <p:commandButton id="add-class" value="#{msg['admin.role.add']}"
+                                             style="margin-top:5px"
+                                             action="#{registerStudent.addClass(studentBean.students.target,classBean.classVoForStudents)}"
+                                             update="panel6"
+                            />
+
+                            <p:commandButton id="remove-class" value="#{msg['admin.role.remove']}"
+                                             style="margin-top:5px"
+                                             action="#{registerStudent.removeClass(studentBean.students.target,classBean.classVoForStudents)}"
+                                             update="panel6"
+                            />
                         </h:panelGroup>
                     </h:form>
                 </p:tab>

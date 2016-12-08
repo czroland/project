@@ -40,14 +40,6 @@ public class MBTeacher implements Serializable {
 
     }
 
-    public TeacherVo getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(TeacherVo teacher) {
-        this.teacher = teacher;
-    }
-
     public DualListModel<TeacherVo> getTeachers() {
         return teachers;
     }
@@ -64,4 +56,11 @@ public class MBTeacher implements Serializable {
         this.teacherService = teacherService;
     }
 
+    public TeacherVo getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeacherVo teacher) {
+        this.teacher = teacher;
+    }
 }
