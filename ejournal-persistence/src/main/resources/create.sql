@@ -22,10 +22,14 @@ INSERT INTO public.subjects(id, name) VALUES (-21, 'Technika, életvitel és gya
 INSERT INTO public.subjects(id, name) VALUES (-22, 'Testnevelés és sport')
 
 INSERT INTO public.users( id, name, firstname, lastname, email, password ) VALUES (-1, 'teacher','a','a','asd@gh.hu','$2a$10$N4rOzufDNCMGWZtyaNoM4ud.7CWRFtEIXirRlDKOf.hIauBeGErXq');
-INSERT INTO public.users( id, name, email, password ) VALUES (2, 'student','123','123');
-INSERT INTO public.teachers( id,user_id ) VALUES (1,2);
+INSERT INTO public.users( id, name, email, password, firstname, lastname ) VALUES (-2, 'student','student@gmail.com','$2a$10$CKMfM6Trt6ljRNowJXWUg.5eO.GyrZRhYsk0GIO/BSG6W4JlC10re','Kis','Elemer');
+INSERT INTO public.users( id, name, email, password, firstname, lastname ) VALUES (-3, 'parent','parent@gmail.com','$2a$10$CKMfM6Trt6ljRNowJXWUg.5eO.GyrZRhYsk0GIO/BSG6W4JlC10re','Kis','Elemer Parent');
+
+INSERT INTO public.parents( id,user_id ) VALUES (-1,-3);
+INSERT INTO public.students( id, user_id, parent_id ) VALUES (-1,-2,-1);
+INSERT INTO public.teachers( id, user_id) VALUES (-1,-1);
+
 INSERT INTO public.classes( id, year, name ) VALUES (-1, '2018','osztaly');
-INSERT INTO public.students( id, user_id, class_id ) VALUES (1, 2,1);
 
 INSERT INTO public.roles( id, name ) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO public.roles( id, name ) VALUES (2, 'ROLE_TEACHER');
@@ -35,3 +39,5 @@ INSERT INTO public.roles( id, name ) VALUES (5, 'ROLE_USER');
 
 INSERT INTO public.users_roles(user_id, roles_id) VALUES(-1,1)
 INSERT INTO public.users_roles(user_id, roles_id) VALUES(-1,2)
+INSERT INTO public.users_roles(user_id, roles_id) VALUES(-3,3)
+INSERT INTO public.users_roles(user_id, roles_id) VALUES(-2,4)
