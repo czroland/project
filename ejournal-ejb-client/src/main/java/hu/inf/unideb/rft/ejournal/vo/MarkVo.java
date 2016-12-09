@@ -2,7 +2,7 @@ package hu.inf.unideb.rft.ejournal.vo;
 
 import java.io.Serializable;
 
-public class MarkVo implements Serializable{
+public class MarkVo implements Serializable {
 
     private static final long serialVersionUID = 5494350187711576327L;
 
@@ -13,6 +13,12 @@ public class MarkVo implements Serializable{
     private SubjectVo subject;
 
     private TeacherVo teacher;
+
+    private Boolean signed;
+
+    public MarkVo() {
+        signed = Boolean.FALSE;
+    }
 
     public StudentVo getStudent() {
         return student;
@@ -44,5 +50,13 @@ public class MarkVo implements Serializable{
 
     public void setTeacher(TeacherVo teacher) {
         this.teacher = teacher;
+    }
+
+    public Boolean getSigned() {
+        return signed;
+    }
+
+    public void setSigned(Boolean signed) {
+        this.signed = signed;
     }
 }

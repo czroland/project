@@ -35,4 +35,9 @@ public class MarkServiceImpl extends AbstractMappingService implements MarkServi
         return null;
     }
 
+    @Override
+    public List<MarkVo> getMarksByStudentId(Long id) {
+        return map(markRepository.findByStudentId(id), MarkVo.class);
+    }
+
 }

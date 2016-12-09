@@ -18,6 +18,9 @@ public class Mark extends BaseEntity{
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private Boolean signed;
+
     public Subject getSubject() {
         return subject;
     }
@@ -40,5 +43,13 @@ public class Mark extends BaseEntity{
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Boolean getSigned() {
+        return signed;
+    }
+
+    public void setSigned(Boolean signed) {
+        this.signed = signed;
     }
 }
