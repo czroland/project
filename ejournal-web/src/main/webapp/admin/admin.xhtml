@@ -132,6 +132,72 @@
                     </h:form>
                 </p:tab>
 
+                <p:tab id="teacher1" title="#{msg['teachers']}">
+                    <h:form>
+                        <h:panelGroup id="panel22">
+
+                            <p:panelGrid columns="1" layout="grid">
+
+                                <h:outputLabel for="tclass" value="#{msg['class']}: *"/>
+                                <p:selectOneMenu id="tclass" required="true"
+                                                 value="#{classBean.classVoForTeachers}" converter="classVoConverter"
+                                                 requiredMessage="#{msg['subj.reg']}">
+                                    <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                                    <f:selectItems value="#{classBean.classSource}" var="class"
+                                                   itemLabel="#{class.name}" itemValue="#{class}"/>
+                                </p:selectOneMenu>
+
+                                <p:dataTable id="teachers2" var="teacher"
+                                             value="#{teacherBean.teachers.source}"
+                                             selection="#{teacherBean.teachers.target}" rowKey="#{teacher.id}"
+                                             style="margin-bottom:0"
+                                             rows="20"
+                                             paginator="true"
+                                             paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="15, 20, 50">
+
+                                    <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+
+                                    <p:column headerText="#{msg['validator.uname']}" sortBy="#{teacher.user.name}">
+                                        <h:outputText value="#{teacher.user.name}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['fname']}" sortBy="#{teacher.user.firstName}">
+                                        <h:outputText value="#{teacher.user.firstName}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['lname']}" sortBy="#{teacher.user.lastName}">
+                                        <h:outputText value="#{teacher.user.lastName}"/>
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['subjects']}">
+                                        <h:dataTable id="classt" var="cl" value="#{teacher.aclasses}">
+                                            <p:column>
+                                                <h:outputText id="c" value="#{cl.name}"/>
+                                            </p:column>
+                                        </h:dataTable>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:panelGrid>
+
+
+                            <p:commandButton id="add-cl" value="#{msg['admin.role.add']}"
+                                             style="margin-top:5px"
+                                             update="panel22"
+                                             action="#{registerTeacher.addClass(teacherBean.teachers.target, classBean.classVoForTeachers)}"
+                            />
+                            <p:commandButton id="remove-cl" value="#{msg['admin.role.remove']}"
+                                             style="margin-top:5px"
+                                             update="panel22"
+                                             action="#{registerTeacher.removeClass(teacherBean.teachers.target, classBean.classVoForTeachers)}"
+                            />
+
+                        </h:panelGroup>
+                    </h:form>
+                </p:tab>
+
                 <p:tab title="#{msg['subjects']}">
                     <h:form>
                         <h:panelGroup id="panel3">

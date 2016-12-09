@@ -24,7 +24,7 @@ public class MBClass implements Serializable {
 
     private ClassVo classVo;
     private ClassVo classVoForStudents;
-
+    private ClassVo classVoForTeachers;
 
     private DualListModel<ClassVo> classes;
 
@@ -84,5 +84,13 @@ public class MBClass implements Serializable {
 
     public void setClassVoForStudents(ClassVo classVoForStudents) {
         this.classVoForStudents = classVoForStudents;
+    }
+
+    public ClassVo getClassVoForTeachers() {
+        return classVoForTeachers;
+    }
+
+    public void setClassVoForTeachers(ClassVo classVoForTeachers) {
+        this.classVoForTeachers = classVoForTeachers;
     }
 }

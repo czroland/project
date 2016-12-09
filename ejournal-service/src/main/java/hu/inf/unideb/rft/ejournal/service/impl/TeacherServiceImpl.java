@@ -1,13 +1,12 @@
 package hu.inf.unideb.rft.ejournal.service.impl;
 
 
-import hu.inf.unideb.rft.ejournal.persistence.entity.Role;
-import hu.inf.unideb.rft.ejournal.persistence.entity.Subject;
-import hu.inf.unideb.rft.ejournal.persistence.entity.Teacher;
-import hu.inf.unideb.rft.ejournal.persistence.entity.User;
+import hu.inf.unideb.rft.ejournal.persistence.entity.*;
+import hu.inf.unideb.rft.ejournal.persistence.entity.Class;
 import hu.inf.unideb.rft.ejournal.persistence.repository.RoleRepository;
 import hu.inf.unideb.rft.ejournal.persistence.repository.TeacherRepository;
 import hu.inf.unideb.rft.ejournal.service.TeacherService;
+import hu.inf.unideb.rft.ejournal.vo.ClassVo;
 import hu.inf.unideb.rft.ejournal.vo.SubjectVo;
 import hu.inf.unideb.rft.ejournal.vo.TeacherVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +76,31 @@ public class TeacherServiceImpl extends AbstractMappingService implements Teache
                 .collect(Collectors.toList());
 
         teacherRepository.findById(id).setSubject(newSubjects);
+    }
+
+    @Override
+    public void addClassToTeacher(Long id, ClassVo classVo) {
+        boolean contains = false;
+
+        for (Class aClass : teacherRepository.findById(id).getAclasses()) {
+            contains = aClass.getName().equals(classVo.getName());
+            if (contains) break;
+        }
+
+        if (!contains) {
+            teacherRepository.findById(id).getAclasses().add(map(classVo, Class.class));
+        }
+    }
+
+    @Override
+    public void removeClassFromTeacher(Long id, ClassVo classVo) {
+
+        List<Class> newClasses = teacherRepository.findById(id)
+                .getAclasses()
+                .stream()
+                .filter(aClass -> !(aClass.getName().equals(classVo.getName())))
+                .collect(Collectors.toList());
+
+        teacherRepository.findById(id).setAclasses(newClasses);
     }
 }

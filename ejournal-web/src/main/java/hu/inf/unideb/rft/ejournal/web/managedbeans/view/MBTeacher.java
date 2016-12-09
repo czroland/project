@@ -29,7 +29,6 @@ public class MBTeacher implements Serializable {
 
     @PostConstruct
     public void init() {
-
         teacher.setUser(new UserVo());
 
         List<TeacherVo> teacherSource = new ArrayList<>();
@@ -37,7 +36,6 @@ public class MBTeacher implements Serializable {
 
         teacherSource = teacherService.getAllTeachers();
         teachers = new DualListModel<TeacherVo>(teacherSource, teacherTarget);
-
     }
 
     public DualListModel<TeacherVo> getTeachers() {

@@ -11,9 +11,8 @@ public class Teacher extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "class_id")
-    private Class aclass;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<Class> aclasses;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Subject> subject;
@@ -34,11 +33,11 @@ public class Teacher extends BaseEntity {
         this.subject = subject;
     }
 
-    public Class getAclass() {
-        return aclass;
+    public List<Class> getAclasses() {
+        return aclasses;
     }
 
-    public void setAclass(Class aclass) {
-        this.aclass = aclass;
+    public void setAclasses(List<Class> aclasses) {
+        this.aclasses = aclasses;
     }
 }
