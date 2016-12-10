@@ -45,3 +45,21 @@ footer span {
     min-width: 205px;
 }
 
+.ui-icon.huflag-icon {
+    background: url("/resources/images/hun.png") no-repeat;
+    height: 25px;
+    width: 25px;
+}
+
+.ui-icon.cvmanager-icon {
+    background: url("#{resource['cvmanager:images/cvmanager.png']}") no-repeat;
+    height: 25px;
+    width: 25px;
+}
+
+.enflag {
+    background-image: url('/resources/images/en.png') !important;
+    background-position: 0 0 !important;
+
+}
+

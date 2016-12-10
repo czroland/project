@@ -65,6 +65,10 @@ public class MBRegisterStudent {
                 .getUser().getName(), role(Roles.ROLE_STUDENT.toString()));
         userService.addRoleToUser(student.getStudent().getParent()
                 .getUser().getName(), role(Roles.ROLE_PARENT.toString()));
+        userService.addRoleToUser(student.getStudent()
+                .getUser().getName(),role(Roles.ROLE_USER.toString()));
+        userService.addRoleToUser(student.getStudent().getParent()
+                .getUser().getName(), role(Roles.ROLE_USER.toString()));
 
         email.sendMessage(student.getStudent().getUser().getEmail(),student.getStudent().getUser().getFirstName(),student.getStudent().getUser().getLastName());
         email.sendMessage(student.getStudent().getParent().getUser().getEmail(),student.getStudent().getParent().getUser().getFirstName(),student.getStudent().getParent().getUser().getLastName());
