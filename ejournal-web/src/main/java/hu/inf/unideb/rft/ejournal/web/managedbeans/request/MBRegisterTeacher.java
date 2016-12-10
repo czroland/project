@@ -53,10 +53,12 @@ public class MBRegisterTeacher {
                         .getPassword()));
 
         RoleVo roleVo = roleService.getRoleByName(Roles.ROLE_TEACHER.toString());
+        RoleVo userRoleVo= roleService.getRoleByName(Roles.ROLE_USER.toString());
 
         teacherService.saveTeacher(teacher.getTeacher());
         userService.addRoleToUser(teacher.getTeacher()
                 .getUser().getName(), roleVo);
+        userService.addRoleToUser(teacher.getTeacher().getUser().getName(), userRoleVo);
         email.sendMessage(teacher.getTeacher().getUser().getEmail(), teacher.getTeacher().getUser().getFirstName(), teacher.getTeacher().getUser().getLastName());
         return "200";
     }
