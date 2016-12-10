@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="../WEB-INF/templates/template.xhtml">
+    <ui:define name="title">
+        #{studentBean.student.user.firstName} #{studentBean.student.user.lastName} #{msg['profile']}
+    </ui:define>
+
+    <ui:define name="body">
+        <f:metadata>
+            <f:viewParam name="id" value="#{publicProfileBean.profileId}"/>
+            <f:viewAction action="#{profileBean.onLoad}"/>
+        </f:metadata>
+
+
+
+        <div class="container text-center">
+
+            <p:panelGrid columns="2" layout="grid">
+                <p:outputLabel for="student-name" value="#{msg['s.name']}:" style="font-size: medium;"/>
+                <h:outputText id="student-name"
+                              value="#{studentBean.student.user.firstName} #{studentBean.student.user.lastName}"
+                              style="font-size: medium; font-weight: bold;"/>
+
+                <p:outputLabel for="student-name" value="#{msg['p.name']}:" style="font-size: medium;"/>
+                <h:outputText id="parent-name" style="font-size: medium; font-weight: bold;"
+                              value="#{studentBean.student.parent.user.firstName} #{studentBean.student.parent.user.lastName}"/>
+
+                <p:outputLabel for="class-name" value="#{msg['class']}:" style="font-size: medium;"/>
+                <h:outputText id="class-name" style="font-size: medium; font-weight: bold;"
+                              value="#{studentBean.student.aclass.name} #{studentBean.student.aclass.year}"/>
+
+            </p:panelGrid>
+
+        </div>
+
+
+    </ui:define>
+
+
+</ui:composition>
+</html>

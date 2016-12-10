@@ -51,6 +51,8 @@ public class MBStudentProfile {
         if(possibleStudent!= null){
             marks.setMarks(markService.getMarksByStudentId(possibleStudent.getId()));
         }
+
+        student.setStudent(possibleStudent);
     }
 
 
