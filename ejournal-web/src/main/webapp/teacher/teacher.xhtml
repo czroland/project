@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="../WEB-INF/templates/template.xhtml">
+    <ui:define name="title">
+        #{msg['teacher.panel']}
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <h3></h3>
+                    <p:accordionPanel activeIndex="-1" style="background: white; margin-right: 10%;margin-left: 10%;">
+                        <p:tab id="teacherprofile" title="#{msg['teacher.panel']}" titleStyle="font-size: xx-large">
+                            <h:panelGrid style="overflow: hidden !important;">
+                                <p:tabView orientation="left" style="border: none; width: 600px" >
+                                    <p:tab title="#{msg['teacher.mysubjects']}">
+                                        <h:panelGrid columns="1" cellpadding="10">
+                                            <p:dataTable value="#{teacherPanelBean.subjects}" var="subject" type="ordered" emptyMessage="#{msg['teacher.subject.norecords']}" tableStyle="overflow-scrolling: hidden !important;">
+                                                <p:column headerText="#{msg['teacher.mysubjects']}">
+                                                    <h:outputText value="#{subject.name}" />
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="#{msg['teacher.myprofile']}">
+                                        <p:panelGrid columns="2">
+                                            <h:outputText value="#{msg['login.firstname']}" />
+                                            <h:outputText value="#{teacherPanelBean.teacher.user.firstName}" />
+
+                                            <h:outputText value="#{msg['login.lastname']}" />
+                                            <h:outputText value="#{teacherPanelBean.teacher.user.lastName}" />
+
+                                            <h:outputText value="#{msg['login.name']}" />
+                                            <h:outputText value="#{teacherPanelBean.teacher.user.name}" />
+
+                                            <h:outputText value="#{msg['login.emailadress']}" />
+                                            <h:outputText value="#{teacherPanelBean.teacher.user.email}" />
+                                        </p:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="#{msg['teacher.myclasses']}">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <p:dataTable value="#{teacherPanelBean.classes}" var="Aclass" type="ordered" emptyMessage="#{msg['teacher.subject.noclasses']}" tableStyle="overflow-scrolling: hidden !important;">
+                                                <p:column headerText="#{msg['teacher.myclasses.name']}">
+                                                    <h:outputText value="#{Aclass.name}" />
+                                                </p:column>
+                                                <p:column headerText="#{msg['teacher.myclasses.year']}">
+                                                    <h:outputText value="#{Aclass.year}" />
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                </p:tabView>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:accordionPanel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
