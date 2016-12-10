@@ -20,7 +20,7 @@
     <header class="container-fluid header">
         <div class="row">
             <div class="col-xs-12 col-sm-1 col-md-1">
-                <h:outputLink value="/../ejournal/index.xhtml">
+                <h:outputLink value="..#{request.contextPath}/index.xhtml">
                     <h:graphicImage library="images" name="logo.png" style="width: 100px" class="img-responsive"/>
                 </h:outputLink>
             </div>
@@ -55,7 +55,7 @@
         <h:form>
             <p:breadCrumb>
                 <ui:insert name="breadCrumb">
-                    <p:menuitem value="Categories" url="/../ejournal/index.xhtml"/>
+                    <p:menuitem value="Categories" url="..#{request.contextPath}/index.xhtml"/>
                 </ui:insert>
             </p:breadCrumb>
         </h:form>

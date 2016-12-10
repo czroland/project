@@ -348,7 +348,9 @@
                                     <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
 
                                     <p:column headerText="#{msg['validator.uname']}" sortBy="#{student.user.name}">
-                                        <h:outputText value="#{student.user.name}"/>
+                                        <h:outputLink value="#{request.contextPath}/profile.xhtml?id=#{publicProfileBean.profileId}">
+                                            <h:outputText value="#{student.user.name}"/>
+                                        </h:outputLink>
                                     </p:column>
 
                                     <p:column headerText="#{msg['fname']}" sortBy="#{student.user.firstName}">
