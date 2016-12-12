@@ -16,6 +16,8 @@ public class MarkVo implements Serializable {
 
     private Boolean signed;
 
+    private int value;
+
     public MarkVo() {
         signed = Boolean.FALSE;
     }
@@ -58,5 +60,13 @@ public class MarkVo implements Serializable {
 
     public void setSigned(Boolean signed) {
         this.signed = signed;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

@@ -103,4 +103,14 @@ public class TeacherServiceImpl extends AbstractMappingService implements Teache
 
         teacherRepository.findById(id).setAclasses(newClasses);
     }
+
+    @Override
+    public TeacherVo getTeacherbyUserId(Long id) {
+        Teacher teacher = null;
+        teacher = teacherRepository.findByUserId(id);
+        if (teacher != null) {
+            return map(teacher, TeacherVo.class);
+        }
+        return null;
+    }
 }

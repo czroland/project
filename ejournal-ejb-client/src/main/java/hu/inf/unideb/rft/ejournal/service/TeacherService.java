@@ -24,4 +24,5 @@ public interface TeacherService {
 
     void removeClassFromTeacher(Long id, ClassVo classVo);
 
+    TeacherVo getTeacherbyUserId(Long id);
 }

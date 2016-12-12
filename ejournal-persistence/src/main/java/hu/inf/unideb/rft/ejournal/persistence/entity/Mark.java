@@ -21,6 +21,9 @@ public class Mark extends BaseEntity{
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean signed;
 
+    @Column(nullable = false, columnDefinition = "numeric check(value >= 1 and value <= 5)")
+    private int value;
+
     public Subject getSubject() {
         return subject;
     }
@@ -51,5 +54,13 @@ public class Mark extends BaseEntity{
 
     public void setSigned(Boolean signed) {
         this.signed = signed;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }
