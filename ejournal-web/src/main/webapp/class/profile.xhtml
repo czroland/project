@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="../WEB-INF/templates/template.xhtml">
+    <ui:define name="title">
+        #{classBean.classVo.name} #{msg['profile']}
+    </ui:define>
+
+    <ui:define name="body">
+        <f:metadata>
+            <f:viewParam name="id" value="#{publicProfileBean.profileId}"/>
+            <f:viewAction action="#{classProfileBean.onLoad}"/>
+        </f:metadata>
+
+
+        <h:form>
+            <div class="container text-center">
+
+                <h:outputText id="class-name" value="#{classProfileBean.aclass.classVo.name} #{msg['class.profile']}"
+                              style="font-size: xx-large; font-weight: bold;">
+                </h:outputText>
+
+                <p:dataList value="#{classProfileBean.students}" var="student" type="ordered" emptyMessage="#{msg['class.empty']}">
+                    <f:facet name="header">
+                        #{msg['class.students']}
+                    </f:facet>
+                    <h:outputLink value="#{request.contextPath}/student/profile.xhtml?id=#{student.id}">
+                        <h:outputText value="#{student.user.firstName} #{student.user.lastName}"/>
+                    </h:outputLink>
+                </p:dataList>
+
+            </div>
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>
+</html>

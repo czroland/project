@@ -44,7 +44,9 @@
                                         <h:panelGrid columns="2" cellpadding="10">
                                             <p:dataTable value="#{teacherPanelBean.classes}" var="Aclass" type="ordered" emptyMessage="#{msg['teacher.subject.noclasses']}" tableStyle="overflow-scrolling: hidden !important;">
                                                 <p:column headerText="#{msg['teacher.myclasses.name']}">
-                                                    <h:outputText value="#{Aclass.name}" />
+                                                    <h:outputLink value="#{request.contextPath}/class/profile.xhtml?id=#{Aclass.id}">
+                                                        <h:outputText value="#{Aclass.name}" />
+                                                    </h:outputLink>
                                                 </p:column>
                                                 <p:column headerText="#{msg['teacher.myclasses.year']}">
                                                     <h:outputText value="#{Aclass.year}" />
