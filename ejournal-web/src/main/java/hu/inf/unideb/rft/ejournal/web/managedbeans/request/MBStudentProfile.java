@@ -73,11 +73,12 @@ public class MBStudentProfile {
         student.setStudent(possibleStudent);
 
         setAdmin();
-        setOwner();
-        setParent();
-        setTeacher();
+        if (student.getStudent() != null) {
+            setOwner();
+            setParent();
+            setTeacher();
+        }
     }
-
 
     private void setAdmin() {
         for (RoleVo roleVo : user.getUser().getRoles()) {
@@ -88,32 +89,28 @@ public class MBStudentProfile {
     }
 
     private void setOwner() {
-        if (student.getStudent() != null) {
-            if (student.getStudent().getUser().getId().equals(user.getUser().getId())) {
-                publiProfile.setOwner(true);
-            }
+
+        if (student.getStudent().getUser().getId().equals(user.getUser().getId())) {
+            publiProfile.setOwner(true);
         }
     }
 
     private void setParent() {
-        if (student.getStudent() != null) {
-            if (student.getStudent().getParent().getUser().getId().equals(user.getUser().getId())) {
-                publiProfile.setParent(true);
-            }
+
+        if (student.getStudent().getParent() != null && student.getStudent().getParent().getUser().getId().equals(user.getUser().getId())) {
+            publiProfile.setParent(true);
         }
     }
 
     private void setTeacher() {
         List<ClassVo> classes;
         teacher.setTeacher(teacherService.getTeacherbyUserId(user.getUser().getId()));
-        if (teacher.getTeacher().getAclasses() != null) {
+        if (teacher.getTeacher() != null && teacher.getTeacher().getAclasses() != null) {
             classes = teacher.getTeacher().getAclasses();
-            if (student.getStudent() != null) {
-                for (ClassVo classVo : classes)
-                    if (student.getStudent().getAclass().getId().equals(classVo.getId())) {
-                        publiProfile.setTeacher(true);
-                    }
-            }
+            for (ClassVo classVo : classes)
+                if (student.getStudent().getAclass().getId().equals(classVo.getId())) {
+                    publiProfile.setTeacher(true);
+                }
         }
     }
 

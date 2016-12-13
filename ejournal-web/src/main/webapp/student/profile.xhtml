@@ -31,90 +31,51 @@
                 <p:outputLabel for="class-name" value="#{msg['class']}:" style="font-size: medium;"/>
                 <h:outputText id="class-name" style="font-size: medium; font-weight: bold;"
                               value="#{studentBean.student.aclass.name} #{studentBean.student.aclass.year}"/>
-
             </p:panelGrid>
-
-            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
-                          onclick="PF('markDialog').show();"
-                          style="text-decoration: none;">
+            <h:form id="student-form">
+                <f:event type="postAddToView" listener="#{profileBean.onLoad}" />
                 <h:panelGroup id="panel">
                     <p:dataTable id="students" var="mark"
-                                 value="#{markBean.marks}"
-                                 selection="#{markBean.marks}" rowKey="#{mark.id}"
+                                 value="#{profileBean.marks.marks}" rowKey="#{mark.id}"
                                  style="margin-bottom:0"
                                  rows="20"
                                  paginator="true"
+                                 paginatorAlwaysVisible="false"
                                  paginatorPosition="bottom"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="15, 20, 50">
 
-                        <p:column headerText="igazolt-é">
-                            <h:outputText value="#{msg['note.signed.'+=mark.signed]}"/>
+                        <p:column headerText="#{msg['signed']}" sortBy="#{mark.signed}">
+                            <h:selectBooleanCheckbox id="check-box"
+                                                     value="#{mark.signed}" disabled="#{mark.signed or (!publicProfileBean.parent and !mark.signed)}">
+                                <f:selectItem itemValue="#{mark.signed}"/>
+                            </h:selectBooleanCheckbox>
                         </p:column>
 
-                        <p:column headerText="#{msg['validator.uname']}" sortBy="#{mark.student}">
-                            <h:outputLink value="#{request.contextPath}/student/profile.xhtml?id=#{student.id}">
-                                <h:outputText value="#{mark.student.user.name}"/>
-                            </h:outputLink>
-                        </p:column>
-
-                        <p:column headerText="#{msg['fname']}" sortBy="#{mark.subject.name}">
+                        <p:column headerText="#{msg['subject']}" sortBy="#{mark.subject.name}">
                             <h:outputText value="#{mark.subject.name}"/>
+                            <h:outputText value="#{publicProfileBean.parent}"/>
+                            <h:outputText value="#{mark.signed}"/>
+
+                            />
+
                         </p:column>
 
-                        <p:column headerText="#{msg['lname']}" sortBy="#{mark.teacher.user.name}">
-                            <h:outputText value="#{mark.teacher.user.name}"/>
+                        <p:column headerText="#{msg['teacher']} #{msg['lname']}"
+                                  sortBy="#{mark.teacher.user.firstName}">
+                            <h:outputText value="#{mark.teacher.user.firstName}"/>
                         </p:column>
 
-                        <p:column headerText="#{msg['lname']}" sortBy="#{mark.teacher.user.name}">
+                        <p:column headerText="#{msg['teacher']} #{msg['lname']}" sortBy="#{mark.teacher.user.lastName}">
+                            <h:outputText value="#{mark.teacher.user.lastName}"/>
+                        </p:column>
+
+                        <p:column headerText="#{msg['mark']}" sortBy="#{mark.teacher.user.name}">
                             <h:outputText value="#{mark.value}"/>
                         </p:column>
                     </p:dataTable>
                 </h:panelGroup>
-            </h:outputLink>
-
-            <p:dialog widgetVar="markDialog" modal="true" closeOnEscape="true" header="Admin panel"
-                      showEffect="fade" hideEffect="fade" minHeight="100" minWidth="100">
-                <h:form>
-                    <h:panelGroup id="panel2">
-                        <p:dataTable id="students2" var="mark"
-                                     value="#{markBean.marks}"
-                                     selection="#{markBean.marks}" rowKey="#{mark.id}"
-                                     style="margin-bottom:0"
-                                     rows="20"
-                                     paginator="true"
-                                     paginatorPosition="bottom"
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                     rowsPerPageTemplate="15, 20, 50">
-                            <p:column headerText="igazolt-é">
-                                <h:selectBooleanCheckbox id="jk"
-                                                         value="#{mark.signed}" disabled="#{mark.signed}">
-                                    <f:selectItem itemValue="#{mark.signed}"/>
-                                </h:selectBooleanCheckbox>
-                            </p:column>
-
-                            <p:column headerText="#{msg['validator.uname']}" sortBy="#{mark.student}">
-                                <h:outputLink value="#{request.contextPath}/student/profile.xhtml?id=#{student.id}">
-                                    <h:outputText value="#{mark.student.user.name}"/>
-                                </h:outputLink>
-                            </p:column>
-
-                            <p:column headerText="#{msg['fname']}" sortBy="#{mark.subject.name}">
-                                <h:outputText value="#{mark.subject.name}"/>
-                            </p:column>
-
-                            <p:column headerText="#{msg['lname']}" sortBy="#{mark.teacher.user.name}">
-                                <h:outputText value="#{mark.teacher.user.name}"/>
-                            </p:column>
-
-                            <p:column headerText="#{msg['lname']}" sortBy="#{mark.teacher.user.name}">
-                                <h:outputText value="#{mark.value}"/>
-                            </p:column>
-                        </p:dataTable>
-                    </h:panelGroup>
-                </h:form>
-            </p:dialog>
-
+            </h:form>
         </div>
 
     </ui:define>

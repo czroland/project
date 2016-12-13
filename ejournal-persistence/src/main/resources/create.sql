@@ -51,7 +51,5 @@ INSERT INTO public.users_roles(user_id, roles_id) VALUES(-2,5)
 INSERT INTO public.users_roles(user_id, roles_id) VALUES(-4,4)
 INSERT INTO public.users_roles(user_id, roles_id) VALUES(-4,5)
 
-
-
 INSERT INTO public.marks(id, signed, student_id, subject_id, teacher_id, value) VALUES(-1, true, -1, -1,-1, 5)
-INSERT INTO public.marks(id, signed, student_id, subject_id, teacher_id, value) VALUES(-2, true, -2, -5,-1, 3)
+INSERT INTO public.marks(id, signed, student_id, subject_id, teacher_id, value) VALUES(-2, false, -1, -5,-1, 3)
