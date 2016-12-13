@@ -23,7 +23,7 @@
                               style="font-size: xx-large; font-weight: bold;">
                 </h:outputText>
 
-                <p:dataList value="#{classProfileBean.students}" var="student" type="ordered" emptyMessage="#{msg['class.empty']}">
+                <p:dataList rendered="#{teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo)}" value="#{classProfileBean.students}" var="student" type="ordered" emptyMessage="#{msg['class.empty']}">
                     <f:facet name="header">
                         #{msg['class.students']}
                     </f:facet>
@@ -31,6 +31,7 @@
                         <h:outputText value="#{student.user.firstName} #{student.user.lastName}"/>
                     </h:outputLink>
                 </p:dataList>
+                <h:outputText rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}">Neked nincs jogod ahhoz hogy ebbe belepiszkálj mert nem te tanítod ezt az osztályt!</h:outputText>
 
             </div>
         </h:form>

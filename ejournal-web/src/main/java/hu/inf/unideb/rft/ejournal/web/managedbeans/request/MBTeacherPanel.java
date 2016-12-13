@@ -38,14 +38,18 @@ public class MBTeacherPanel implements Serializable{
     public void init() {
         User uservo = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserVo user = getUserService().getUserByName(uservo.getUsername());
-        List<TeacherVo> teachers= getTeacherService().getAllTeachers();
-        for (TeacherVo i : teachers) {
+        //List<TeacherVo> teachers= getTeacherService().getAllTeachers();
+        /*for (TeacherVo i : teachers) {
             if (Objects.equals(user.getEmail(), i.getUser().getEmail())){
                 teacher=i;
             }
+        }*/
+        teacher = getTeacherService().getTeacherbyUserId(user.getId());
+        if (teacher != null) {
+            subjects=teacher.getSubject();
+            classes=teacher.getAclasses();
         }
-        subjects=teacher.getSubject();
-        classes=teacher.getAclasses();
+
 
     }
 

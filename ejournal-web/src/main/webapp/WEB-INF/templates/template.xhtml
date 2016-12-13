@@ -31,10 +31,12 @@
                 <h:form id="menuForm">
                     <p:growl id="messages" autoUpdate="true" showDetail="true"/>
                     <p:menubar>
-                        <p:menuitem value="#{msg['teacher']}" icon="fa fa-pencil"/>
-                        <p:menuitem value="#{msg['student']}" icon="fa fa-book"/>
-                        <p:menuitem value="#{msg['parent']}" url="/../" icon="fa fa-users"/>
-                        <p:menuitem value="Admin" url="/../" icon="fa fa-lock"/>
+                        <p:menuitem value="#{msg['teacher']}" url="/../ejournal/teacher/teacher.xhtml" icon="fa fa-pencil"/>
+                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal != null) and (currentUserBean.student != null)}" value="#{msg['student']}" url="/../ejournal/student/profile.xhtml?id=#{currentUserBean.student.id}" icon="fa fa-book"/>
+                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal == null) or (currentUserBean.student == null)}" value="#{msg['student']}" icon="fa fa-book"/>
+                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal != null) and (currentUserBean.parent != null)}" value="#{msg['parent']}" url="/../ejournal/student/profile.xhtml?id=#{currentUserBean.parent.id}" icon="fa fa-users"/>
+                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal == null) or (currentUserBean.parent == null)}" value="#{msg['parent']}" icon="fa fa-users"/>
+                        <p:menuitem value="Admin" url="/../ejournal/admin/admin.xhtml" icon="fa fa-lock"/>
                         <p:menuitem rendered="#{facesContext.externalContext.userPrincipal == null}" value="#{msg['login']}" url="/../ejournal/login.xhtml" icon="fa fa-spinner fa-pulse"/>
                         <p:menuitem rendered="#{facesContext.externalContext.userPrincipal != null}" value="#{msg['logout']}" url="/../ejournal/logout" icon="fa fa-spinner fa-pulse"/>
                     </p:menubar>

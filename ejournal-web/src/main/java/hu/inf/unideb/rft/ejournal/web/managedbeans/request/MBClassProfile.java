@@ -44,7 +44,6 @@ public class MBClassProfile implements Serializable{
     public void onLoad() {
         ClassVo possibleClass;
         List<StudentVo> allstudents = getStudentService().getAllStudents();
-        //students = new ArrayList<StudentVo>();
 
         if (publiProfile.getProfileId() != null) {
             possibleClass = classService.getClassById(publiProfile.getProfileId());
@@ -59,8 +58,6 @@ public class MBClassProfile implements Serializable{
                 }
             }
         }
-
-
     }
 
     public MBClass getAclass() {

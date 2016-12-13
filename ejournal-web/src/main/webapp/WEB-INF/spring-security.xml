@@ -18,6 +18,10 @@
         <security:intercept-url pattern="/student/*"
                                 access="hasRole('USER')"/>
 
+        <security:intercept-url pattern="/class/*"
+                                access="hasRole('USER')"/>
+
+
         <security:form-login login-page="/login.xhtml"
                              login-processing-url="/login" default-target-url="/login.xhtml"
                              authentication-failure-url="/login.xhtml"
