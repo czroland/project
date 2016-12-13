@@ -55,12 +55,6 @@ public class MBWhatIsTheCurrentUser implements Serializable{
                 parent=i;
             }
         }
-        /*if (teacher != null) {
-            subjects=teacher.getSubject();
-            classes=teacher.getAclasses();
-        }*/
-
-
     }
 
     public TeacherService getTeacherService() {
