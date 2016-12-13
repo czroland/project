@@ -30,14 +30,10 @@ public class MBLocale implements Serializable {
 
     public void setLanguageToEnglish(ActionEvent event) throws IOException {
         locale = new Locale("en");
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
     }
 
     public void setLanguageToHungarian(ActionEvent event) throws IOException {
         locale = new Locale("hu_hu");
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
     }
 
 }

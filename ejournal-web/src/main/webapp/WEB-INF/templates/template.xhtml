@@ -40,9 +40,11 @@
                     </p:menubar>
                     <p:outputLabel value="#{msg['languages']}"/>
                     <p:commandLink actionListener="#{localeBean.setLanguageToHungarian}">
+                        <f:ajax render="@all" />
                         <h:graphicImage name="images/hun.png" height="40" width="40" style="margin-right: 5px"/>
                     </p:commandLink>
                     <p:commandLink actionListener="#{localeBean.setLanguageToEnglish}">
+                        <f:ajax render="@all" />
                         <h:graphicImage name="images/en.png" height="40" width="40"/>
                     </p:commandLink>
                 </h:form>
