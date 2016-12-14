@@ -51,4 +51,14 @@ public class ParentServiceImpl extends AbstractMappingService implements ParentS
         return null;
     }
 
+    @Override
+    public ParentVo getParentByUserId(Long id) {
+        Parent parent = null;
+        parent = parentRepository.findByUserId(id);
+        if (parent != null) {
+            return map(parent, ParentVo.class);
+        }
+        return null;
+    }
+
 }
