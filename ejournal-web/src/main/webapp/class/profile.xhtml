@@ -23,15 +23,58 @@
                               style="font-size: xx-large; font-weight: bold;">
                 </h:outputText>
 
-                <p:dataList rendered="#{teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo)}" value="#{classProfileBean.students}" var="student" type="ordered" emptyMessage="#{msg['class.empty']}">
+                <p:dataTable rendered="#{teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
+                             value="#{classProfileBean.students}" var="student" type="ordered" emptyMessage="#{msg['class.empty']}">
                     <f:facet name="header">
                         #{msg['class.students']}
                     </f:facet>
-                    <h:outputLink value="#{request.contextPath}/student/profile.xhtml?id=#{student.id}">
-                        <h:outputText value="#{student.user.firstName} #{student.user.lastName}"/>
-                    </h:outputLink>
-                </p:dataList>
-                <h:outputText rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}">Neked nincs jogod ahhoz hogy ebbe belepiszkálj mert nem te tanítod ezt az osztályt!</h:outputText>
+                    <p:column headerText="Teljes név">
+                        <h:outputLink value="#{request.contextPath}/student/profile.xhtml?id=#{student.id}">
+                            <h:outputText value="#{student.user.firstName} #{student.user.lastName}"/>
+                        </h:outputLink>
+                    </p:column>
+                    <p:column headerText="Az osztályzathoz tartozó tárgy">
+                        <p:selectOneMenu id="subject3" required="true"
+                                         value="#{subjectBean.subjectVoForMarks}"
+                                         requiredMessage="#{msg['subj.reg']}" converter="subjectVoConverter">
+                            <p:ajax event="change" update="@this" />
+                            <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                            <f:selectItems value="#{subjectBean.subjects}" var="subject"
+                                           itemLabel="#{subject.name}" itemValue="#{subject}"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="A beírandó osztályzat">
+                        <p:selectOneMenu id="mark" required="true"
+                                         value="#{classProfileBean.grade}"
+                                         requiredMessage="#{msg['subj.reg']}">
+                            <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                            <f:selectItems value="#{classProfileBean.grades}" var="mark"
+                                           itemLabel="#{mark}" itemValue="#{mark}"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:dataTable>
+                <p:selectOneMenu rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}" id="subject2" required="true"
+                                 value="#{subjectBean.subjectVoForMarks}"
+                                 requiredMessage="#{msg['subj.reg']}" converter="subjectVoConverter">
+                    <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                    <f:selectItems value="#{subjectBean.subjects}" var="subject"
+                                   itemLabel="#{subject.name}" itemValue="#{subject}"/>
+                </p:selectOneMenu>
+                <p:selectOneMenu rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}" id="mark2" required="true"
+                                 value="#{classProfileBean.grade}"
+                                 requiredMessage="#{msg['subj.reg']}">
+                    <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
+                    <f:selectItems value="#{classProfileBean.grades}" var="mark"
+                                   itemLabel="#{mark}" itemValue="#{mark}"/>
+                </p:selectOneMenu>
+                <p:commandButton id="add-subject" value="Jegyek Beírása"
+                                 style="margin-top:5px"
+                                 action="#{markBean.addMark(classProfileBean.student.students.source,subjectBean.subjectVoForMarks,classProfileBean.grade)}"
+                />
+                <br>
+                    <h:outputText rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}" value="Neked nincs jogod ahhoz hogy ebbe belepiszkálj mert nem te tanítod ezt az osztályt!">
+                    </h:outputText>
+                </br>
 
             </div>
         </h:form>

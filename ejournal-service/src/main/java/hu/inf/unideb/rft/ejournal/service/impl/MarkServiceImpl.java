@@ -21,7 +21,7 @@ public class MarkServiceImpl extends AbstractMappingService implements MarkServi
     private MarkRepository markRepository;
 
     @Override
-    public void saveMark(MarkVo markVo) {
+    public void saveMark(MarkVo markVo){
         markRepository.save(map(markVo, Mark.class));
     }
 
