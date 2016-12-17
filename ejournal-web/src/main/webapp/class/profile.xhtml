@@ -25,14 +25,14 @@
 
 
                 <br>
-                <p:selectOneMenu id="mark" required="true" rendered="#{teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
+                <p:selectOneMenu id="mark" required="true" rendered="#{teacherPanelBean.teacher.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
                                  value="#{classProfileBean.grade}"
                                  requiredMessage="#{msg['mark.req']}">
                     <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
                     <f:selectItems value="#{classProfileBean.grades}" var="mark"
                                    itemLabel="#{mark}" itemValue="#{mark}"/>
                 </p:selectOneMenu>
-                <p:selectOneMenu id="subject3" required="true" rendered="#{teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
+                <p:selectOneMenu id="subject3" required="true" rendered="#{teacherPanelBean.teacher.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
                                  value="#{subjectBean.subjectVoForMarks}"
                                  requiredMessage="#{msg['subj.reg']}" converter="subjectVoConverter">
                     <p:ajax event="change" update="@this" />
@@ -41,7 +41,7 @@
                                    itemLabel="#{subject.name}" itemValue="#{subject}"/>
                 </p:selectOneMenu>
                 </br>
-                <p:dataTable rendered="#{teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
+                <p:dataTable rendered="#{teacherPanelBean.teacher.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
                              value="#{studentBean.students.target}" var="student" type="ordered" emptyMessage="#{msg['class.empty']}">
                     <f:facet name="header">
                         #{msg['class.students']}
@@ -59,7 +59,7 @@
                     </p:column>
                 </p:dataTable>
                 <br>
-                    <h:outputText rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}" value="#{msg['class.nopermission']}">
+                    <h:outputText rendered="#{not(teacherPanelBean.teacher.teacher.aclasses.contains(classProfileBean.aclass.classVo))}" value="#{msg['class.nopermission']}">
                     </h:outputText>
                 </br>
 
