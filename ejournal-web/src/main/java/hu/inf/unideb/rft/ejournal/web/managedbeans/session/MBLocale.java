@@ -28,12 +28,14 @@ public class MBLocale implements Serializable {
         return locale;
     }
 
-    public void setLanguageToEnglish(ActionEvent event) throws IOException {
+    public String setLanguageToEnglish(ActionEvent event) throws IOException {
         locale = new Locale("en");
+        return "index?backurl=actionUrl&id=actionId&faces-redirect=true";
     }
 
-    public void setLanguageToHungarian(ActionEvent event) throws IOException {
+    public String setLanguageToHungarian(ActionEvent event) throws IOException {
         locale = new Locale("hu_hu");
+        return "index?backurl=actionUrl&id=actionId&faces-redirect=true";
     }
 
 }
