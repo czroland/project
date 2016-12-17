@@ -72,53 +72,7 @@ public class MBClassProfile{
                 }
             }
         }
-    }
-
-    @ManagedProperty(value = "#{currentUserBean}")
-    private MBWhatIsTheCurrentUser current;
-
-    public void addMark(SubjectVo subject,int grade) {
-        Long i=1L;
-        System.out.println("DEBUG1");
-        onLoad();
-        for (StudentVo studentVo : students) {
-            MarkVo mark = new MarkVo();
-            mark.setTeacher(current.getTeacher());
-            mark.setStudent(studentVo);
-            System.out.println(mark.getStudent().getUser().getFirstName());
-            mark.setId(i);
-            System.out.println(mark.getId());
-            System.out.println(subject);
-            mark.setValue(grade);
-            System.out.println(mark.getValue());
-            mark.setSubject(subject);
-            System.out.println(mark.getSubject().getName());
-            markService.saveMark(mark);
-            System.out.println("DEBUG");
-            System.out.println(markService.getMarkbyId(i).getStudent().getUser().getFirstName());
-            System.out.println(markService.getMarkbyId(i).getTeacher().getUser().getEmail());
-            System.out.println(markService.getMarkbyId(i).getSubject().getName());
-            System.out.println(markService.getMarkbyId(i).getValue());
-            System.out.println("DEBUG");
-            i=i+1;
-        }
-    }
-
-    public void setGrade(StudentVo currentStudent,SubjectVo subject,int grade){
-        MarkVo mark = new MarkVo();
-        //teacher.init();
-        //mark.setTeacher(teacher.getTeacher());
-        mark.setTeacher(current.getTeacher());
-        System.out.println(mark.getTeacher().getUser().getEmail());
-        mark.setStudent(currentStudent);
-        System.out.println(mark.getStudent().getUser().getFirstName());
-        mark.setSigned(false);
-        mark.setSubject(subject);
-        System.out.println(mark.getSubject().getName());
-        mark.setValue(grade);
-        System.out.println(mark.getValue());
-        mark.setId(-1L);
-        markService.saveMark(mark);
+        student.getStudents().setTarget(students);
     }
 
     public MBClass getAclass() {
@@ -205,14 +159,6 @@ public class MBClassProfile{
         this.markService = markService;
     }
 
-    public MBWhatIsTheCurrentUser getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(MBWhatIsTheCurrentUser current) {
-        this.current = current;
-    }
-
     public int getGrade() {
         return grade;
     }
@@ -224,4 +170,5 @@ public class MBClassProfile{
     public void setGrades(int[] grades) {
         this.grades = grades;
     }
+
 }

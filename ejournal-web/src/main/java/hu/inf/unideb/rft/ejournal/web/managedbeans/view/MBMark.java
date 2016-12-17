@@ -40,30 +40,13 @@ public class MBMark implements Serializable {
     @ManagedProperty(value = "#{currentUserBean}")
     private MBWhatIsTheCurrentUser current;
 
-    public void addMark(List<StudentVo> students,SubjectVo subject, int grade) {
-        Long i=1L;
-        System.out.println("DEBUG1");
-        for (StudentVo studentVo : students) {
-            MarkVo mark = new MarkVo();
-            mark.setTeacher(current.getTeacher());
-            mark.setStudent(studentVo);
-            System.out.println(mark.getStudent().getUser().getFirstName());
-            //mark.setId(i);
-            //System.out.println(mark.getId());
-            System.out.println(subject);
-            mark.setValue(grade);
-            System.out.println(mark.getValue());
-            mark.setSubject(subject);
-            System.out.println(mark.getSubject().getName());
-            markService.saveMark(mark);
-            System.out.println("DEBUG");
-            System.out.println(markService.getMarkbyId(i).getStudent().getUser().getFirstName());
-            System.out.println(markService.getMarkbyId(i).getTeacher().getUser().getEmail());
-            System.out.println(markService.getMarkbyId(i).getSubject().getName());
-            System.out.println(markService.getMarkbyId(i).getValue());
-            System.out.println("DEBUG");
-            i=i+1;
-        }
+    public void addMark(StudentVo student,SubjectVo subject, int grade) {
+        MarkVo mark = new MarkVo();
+        mark.setTeacher(current.getTeacher());
+        mark.setStudent(student);
+        mark.setValue(grade);
+        mark.setSubject(subject);
+        markService.saveMark(mark);
     }
 
 
