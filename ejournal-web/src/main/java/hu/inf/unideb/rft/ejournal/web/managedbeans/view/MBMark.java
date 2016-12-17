@@ -42,7 +42,7 @@ public class MBMark implements Serializable {
 
     public void addMark(StudentVo student,SubjectVo subject, int grade) {
         MarkVo mark = new MarkVo();
-        mark.setTeacher(current.getTeacher());
+        mark.setTeacher(current.getTeacher().getTeacher());
         mark.setStudent(student);
         mark.setValue(grade);
         mark.setSubject(subject);
