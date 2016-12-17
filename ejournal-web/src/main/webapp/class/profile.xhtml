@@ -27,7 +27,7 @@
                 <br>
                 <p:selectOneMenu id="mark" required="true" rendered="#{teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo)}"
                                  value="#{classProfileBean.grade}"
-                                 requiredMessage="#{msg['subj.reg']}">
+                                 requiredMessage="#{msg['mark.req']}">
                     <f:selectItem itemLabel="#{msg['reg.sel']}" itemValue=""/>
                     <f:selectItems value="#{classProfileBean.grades}" var="mark"
                                    itemLabel="#{mark}" itemValue="#{mark}"/>
@@ -46,20 +46,20 @@
                     <f:facet name="header">
                         #{msg['class.students']}
                     </f:facet>
-                    <p:column headerText="Teljes név">
+                    <p:column headerText="#{msg['class.fullname']}">
                         <h:outputLink value="#{request.contextPath}/student/profile.xhtml?id=#{student.id}">
                             <h:outputText value="#{student.user.firstName} #{student.user.lastName}"/>
                         </h:outputLink>
                     </p:column>
                     <p:column>
-                        <p:commandButton id="add-mark" value="Érdemjegy beírása #{student.user.firstName} #{student.user.lastName} számára!"
+                        <p:commandButton id="add-mark" value="#{msg['class.mark1']} #{student.user.firstName} #{student.user.lastName} #{msg['class.mark2']}"
                                          style="margin-top:5px"
                                          action="#{markBean.addMark(student,subjectBean.subjectVoForMarks,classProfileBean.grade)}"
                         />
                     </p:column>
                 </p:dataTable>
                 <br>
-                    <h:outputText rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}" value="Neked nincs jogod ahhoz hogy ebbe belepiszkálj mert nem te tanítod ezt az osztályt!">
+                    <h:outputText rendered="#{not(teacherPanelBean.teacher.aclasses.contains(classProfileBean.aclass.classVo))}" value="#{msg['class.nopermission']}">
                     </h:outputText>
                 </br>
 
