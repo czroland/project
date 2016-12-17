@@ -36,7 +36,7 @@
                 <f:event type="postAddToView" listener="#{profileBean.onLoad}" />
                 <h:panelGroup id="panel">
                     <p:dataTable id="students" var="mark"
-                                 value="#{profileBean.marks.marks}" rowKey="#{mark.id}"
+                                 value="#{markBean.marks}" rowKey="#{mark.id}"
                                  style="margin-bottom:0"
                                  rows="20"
                                  paginator="true"
@@ -54,9 +54,6 @@
 
                         <p:column headerText="#{msg['subject']}" sortBy="#{mark.subject.name}">
                             <h:outputText value="#{mark.subject.name}"/>
-                            <h:outputText value="#{publicProfileBean.parent}"/>
-                            <h:outputText value="#{mark.signed}"/>
-
                             />
 
                         </p:column>

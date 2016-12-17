@@ -37,6 +37,9 @@ public class MBStudentProfile {
     @ManagedProperty(value = "#{userBean}")
     private MBUser user;
 
+    @ManagedProperty(value = "#{currentUserBean}")
+    private MBWhatIsTheCurrentUser whatIsTheCurrentUser;
+
     @EJB
     StudentService studentService;
 
@@ -78,6 +81,9 @@ public class MBStudentProfile {
             setParent();
             setTeacher();
         }
+        //marks.init();
+        whatIsTheCurrentUser.init();
+
     }
 
     private void setAdmin() {
@@ -176,5 +182,21 @@ public class MBStudentProfile {
 
     public void setUser(MBUser user) {
         this.user = user;
+    }
+
+    public MBWhatIsTheCurrentUser getWhatIsTheCurrentUser() {
+        return whatIsTheCurrentUser;
+    }
+
+    public void setWhatIsTheCurrentUser(MBWhatIsTheCurrentUser whatIsTheCurrentUser) {
+        this.whatIsTheCurrentUser = whatIsTheCurrentUser;
+    }
+
+    public TeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 }
