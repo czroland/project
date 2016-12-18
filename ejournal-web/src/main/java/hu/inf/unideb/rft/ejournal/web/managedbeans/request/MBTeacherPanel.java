@@ -6,12 +6,14 @@ import hu.inf.unideb.rft.ejournal.vo.ClassVo;
 import hu.inf.unideb.rft.ejournal.vo.SubjectVo;
 import hu.inf.unideb.rft.ejournal.vo.TeacherVo;
 import hu.inf.unideb.rft.ejournal.vo.UserVo;
+import hu.inf.unideb.rft.ejournal.web.managedbeans.view.MBTeacher;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,20 +30,18 @@ public class MBTeacherPanel implements Serializable{
     @EJB
     private UserService userService;
 
-    private TeacherVo teacher;
-
-    private List<SubjectVo> subjects;
-
-    private List<ClassVo> classes;
+    @ManagedProperty(value = "#{teacherBean}")
+    private MBTeacher teacher;
 
     @PostConstruct
     public void init() {
         User uservo = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserVo user = getUserService().getUserByName(uservo.getUsername());
-        teacher = getTeacherService().getTeacherbyUserId(user.getId());
+        teacher.setTeacher(getTeacherService().getTeacherbyUserId(user.getId()));
+        //); = getTeacherService().getTeacherbyUserId(user.getId());
         if (teacher != null) {
-            subjects=teacher.getSubject();
-            classes=teacher.getAclasses();
+            teacher.getTeacher().setSubject(teacher.getTeacher().getSubject());
+            teacher.getTeacher().setAclasses(teacher.getTeacher().getAclasses());
         }
 
 
@@ -63,27 +63,12 @@ public class MBTeacherPanel implements Serializable{
         this.teacherService = teacherService;
     }
 
-    public List<SubjectVo> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<SubjectVo> subjects) {
-        this.subjects = subjects;
-    }
-
-    public TeacherVo getTeacher() {
+    public MBTeacher getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(TeacherVo teacher) {
+    public void setTeacher(MBTeacher teacher) {
         this.teacher = teacher;
     }
 
-    public List<ClassVo> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(List<ClassVo> classes) {
-        this.classes = classes;
-    }
 }

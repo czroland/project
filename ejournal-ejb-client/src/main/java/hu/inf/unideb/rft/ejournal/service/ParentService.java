@@ -14,4 +14,6 @@ public interface ParentService {
     ParentVo getParentByName(String name);
 
     ParentVo getParentByStudentId(Long id);
+
+    ParentVo getParentByUserId(Long id);
 }
