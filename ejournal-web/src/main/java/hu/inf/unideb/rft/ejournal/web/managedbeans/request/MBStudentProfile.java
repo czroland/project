@@ -16,7 +16,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "profileBean")
@@ -53,7 +52,6 @@ public class MBStudentProfile {
     @EJB
     TeacherService teacherService;
 
-
     public void onLoad() {
         StudentVo possibleStudent;
         user.setUser(
@@ -70,10 +68,6 @@ public class MBStudentProfile {
             possibleStudent = studentService.getStudentById(user.getUser().getId());
         }
 
-       /* if (possibleStudent != null) {
-            marks.setMarks(markService.getMarksByStudentId(possibleStudent.getId()));
-        }*/
-
         student.setStudent(possibleStudent);
 
         setAdmin();
@@ -82,7 +76,6 @@ public class MBStudentProfile {
             setParent();
             setTeacher();
         }
-        //marks.init();
         whatIsTheCurrentUser.init();
 
     }

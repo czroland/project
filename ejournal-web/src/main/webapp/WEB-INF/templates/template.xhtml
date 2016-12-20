@@ -17,61 +17,81 @@
 
 <h:body>
     <f:view locale="#{localeBean.locale}">
-    <header class="container-fluid header">
-        <div class="row">
-            <div class="col-xs-12 col-sm-1 col-md-1">
-                <h:outputLink value="..#{request.contextPath}/index.xhtml">
-                    <h:graphicImage library="images" name="logo.png" style="width: 100px" class="img-responsive"/>
-                </h:outputLink>
+        <header class="container-fluid header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-1 col-md-1">
+                    <h:outputLink value="..#{request.contextPath}/index.xhtml">
+                        <h:graphicImage library="images" name="logo.png" style="width: 100px" class="img-responsive"/>
+                    </h:outputLink>
+                </div>
+                <div class="col-xs-12 col-sm-11 col-md-7">
+                    <h6 class="welcome-text">#{msg['welcome']}</h6>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <h:form id="menuForm">
+                        <p:growl id="messages" autoUpdate="true" showDetail="true"/>
+                        <p:menubar>
+                            <p:menuitem value="#{msg['teacher']}" url="/../ejournal/teacher/teacher.xhtml"
+                                        icon="fa fa-pencil"/>
+                            <p:menuitem
+                                    rendered="#{(facesContext.externalContext.userPrincipal != null) and (studentBean.student != null)}"
+                                    value="#{msg['student']}"
+                                    url="/../ejournal/student/profile.xhtml?id=#{currentUserBean.student.student.id}"
+                                    icon="fa fa-book"/>
+                            <p:menuitem
+                                    rendered="#{(facesContext.externalContext.userPrincipal == null) or (studentBean.student == null)}"
+                                    value="#{msg['student']}" icon="fa fa-book"/>
+                            <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal != null) }"
+                                        value="#{msg['parent']}"
+                                        url="/../ejournal/student/profile.xhtml?id=#{currentUserBean.student.student.id}"
+                                        icon="fa fa-users"/>
+                            <p:menuitem
+                                    rendered="#{(facesContext.externalContext.userPrincipal == null) or (currentUserBean.student.student.parent == null)}"
+                                    value="#{msg['parent']}" icon="fa fa-users"/>
+                            <p:menuitem value="Admin" url="/../ejournal/admin/admin.xhtml" icon="fa fa-lock"/>
+                            <p:menuitem rendered="#{facesContext.externalContext.userPrincipal == null}"
+                                        value="#{msg['login']}" url="/../ejournal/login.xhtml"
+                                        icon="fa fa-spinner fa-pulse"/>
+                            <p:menuitem rendered="#{facesContext.externalContext.userPrincipal != null}"
+                                        value="#{msg['logout']}" url="/../ejournal/logout"
+                                        icon="fa fa-spinner fa-pulse"/>
+                        </p:menubar>
+                        <p:outputLabel value="#{msg['languages']}"/>
+                        <p:commandLink action="#{localeBean.setLanguageToHungarian}">
+                            <f:ajax render="@all"/>
+                            <h:graphicImage name="images/hun.png" height="40" width="40" style="margin-right: 5px"/>
+                        </p:commandLink>
+                        <p:commandLink action="#{localeBean.setLanguageToEnglish}">
+                            <f:ajax render="@all"/>
+                            <h:graphicImage name="images/en.png" height="40" width="40"/>
+                        </p:commandLink>
+                    </h:form>
+
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-11 col-md-7">
-                <h6 class="welcome-text">#{msg['welcome']}</h6>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4">
-                <h:form id="menuForm">
-                    <p:growl id="messages" autoUpdate="true" showDetail="true"/>
-                    <p:menubar>
-                        <p:menuitem value="#{msg['teacher']}" url="/../ejournal/teacher/teacher.xhtml" icon="fa fa-pencil"/>
-                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal != null) and (studentBean.student != null)}" value="#{msg['student']}" url="/../ejournal/student/profile.xhtml?id=#{currentUserBean.student.student.id}" icon="fa fa-book"/>
-                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal == null) or (studentBean.student == null)}" value="#{msg['student']}" icon="fa fa-book"/>
-                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal != null) }" value="#{msg['parent']}" url="/../ejournal/student/profile.xhtml?id=#{currentUserBean.student.student.id}" icon="fa fa-users"/>
-                        <p:menuitem rendered="#{(facesContext.externalContext.userPrincipal == null) or (currentUserBean.student.student.parent == null)}" value="#{msg['parent']}" icon="fa fa-users"/>
-                        <p:menuitem value="Admin" url="/../ejournal/admin/admin.xhtml" icon="fa fa-lock"/>
-                        <p:menuitem rendered="#{facesContext.externalContext.userPrincipal == null}" value="#{msg['login']}" url="/../ejournal/login.xhtml" icon="fa fa-spinner fa-pulse"/>
-                        <p:menuitem rendered="#{facesContext.externalContext.userPrincipal != null}" value="#{msg['logout']}" url="/../ejournal/logout" icon="fa fa-spinner fa-pulse"/>
-                    </p:menubar>
-                    <p:outputLabel value="#{msg['languages']}"/>
-                    <p:commandLink action="#{localeBean.setLanguageToHungarian}">
-                        <f:ajax render="@all" />
-                        <h:graphicImage name="images/hun.png" height="40" width="40" style="margin-right: 5px"/>
-                    </p:commandLink>
-                    <p:commandLink action="#{localeBean.setLanguageToEnglish}">
-                        <f:ajax render="@all" />
-                        <h:graphicImage name="images/en.png" height="40" width="40"/>
-                    </p:commandLink>
-                </h:form>
+        </header>
 
-            </div>
-        </div>
-    </header>
+        <nav>
+            <h:form>
+                <p:breadCrumb>
+                    <ui:insert name="breadCrumb">
+                        <p:menuitem value="Categories" url="..#{request.contextPath}/index.xhtml"/>
+                        <p:menuitem rendered="#{facesContext.externalContext.userPrincipal ne null}"
+                                    value="#{facesContext.externalContext.userPrincipal.name}"
+                                    url="/../ejournal/login.xhtml"/>
 
-    <nav>
-        <h:form>
-            <p:breadCrumb>
-                <ui:insert name="breadCrumb">
-                    <p:menuitem value="Categories" url="..#{request.contextPath}/index.xhtml"/>
-                </ui:insert>
-            </p:breadCrumb>
-        </h:form>
-    </nav>
+                    </ui:insert>
+                </p:breadCrumb>
+            </h:form>
+        </nav>
 
-    <section id="main-content" class="main-content">
-        <ui:insert name="body"/>
-    </section>
+        <section id="main-content" class="main-content">
+            <ui:insert name="body"/>
+        </section>
 
-    <footer>
-        <span>© 2016 E-journal</span>
-    </footer>
+        <footer>
+            <span>© 2016 E-journal</span>
+        </footer>
     </f:view>
 </h:body>
 </html>
