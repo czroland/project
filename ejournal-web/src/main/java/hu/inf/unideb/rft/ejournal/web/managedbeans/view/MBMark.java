@@ -5,6 +5,7 @@ import hu.inf.unideb.rft.ejournal.vo.MarkVo;
 import hu.inf.unideb.rft.ejournal.vo.StudentVo;
 import hu.inf.unideb.rft.ejournal.vo.SubjectVo;
 import hu.inf.unideb.rft.ejournal.web.managedbeans.request.MBWhatIsTheCurrentUser;
+import org.primefaces.model.DualListModel;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -24,23 +25,30 @@ public class MBMark implements Serializable {
     @ManagedProperty(value = "#{publicProfileBean}")
     private MBProfile publiProfile;
 
+    @ManagedProperty(value = "#{currentUserBean}")
+    private MBWhatIsTheCurrentUser current;
+
     @EJB
     MarkService markService;
 
-    private List<MarkVo> marks = new ArrayList<>();
+    private DualListModel<MarkVo> marks;
 
     private MarkVo mark;
 
     @PostConstruct
     public void init() {
         mark = new MarkVo();
-        marks = markService.getMarksByStudentId(publiProfile.getProfileId());
+
+        List<MarkVo> markSource = new ArrayList<>();
+        List<MarkVo> markTarget = new ArrayList<>();
+
+        markSource = markService.getMarksByStudentId(publiProfile.getProfileId());
+
+        marks = new DualListModel<MarkVo>(markSource, markTarget);
+
     }
 
-    @ManagedProperty(value = "#{currentUserBean}")
-    private MBWhatIsTheCurrentUser current;
-
-    public void addMark(StudentVo student,SubjectVo subject, int grade) {
+    public void addMark(StudentVo student, SubjectVo subject, int grade) {
         MarkVo mark = new MarkVo();
         mark.setTeacher(current.getTeacher().getTeacher());
         mark.setStudent(student);
@@ -54,11 +62,11 @@ public class MBMark implements Serializable {
         return markService.getMarkbyId(id);
     }
 
-    public List<MarkVo> getMarks() {
+    public DualListModel<MarkVo> getMarks() {
         return marks;
     }
 
-    public void setMarks(List<MarkVo> marks) {
+    public void setMarks(DualListModel<MarkVo> marks) {
         this.marks = marks;
     }
 

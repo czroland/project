@@ -5,6 +5,7 @@ import hu.inf.unideb.rft.ejournal.service.StudentService;
 import hu.inf.unideb.rft.ejournal.service.TeacherService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
 import hu.inf.unideb.rft.ejournal.vo.ClassVo;
+import hu.inf.unideb.rft.ejournal.vo.MarkVo;
 import hu.inf.unideb.rft.ejournal.vo.RoleVo;
 import hu.inf.unideb.rft.ejournal.vo.StudentVo;
 import hu.inf.unideb.rft.ejournal.web.enums.Roles;
@@ -69,9 +70,9 @@ public class MBStudentProfile {
             possibleStudent = studentService.getStudentById(user.getUser().getId());
         }
 
-        if (possibleStudent != null) {
+       /* if (possibleStudent != null) {
             marks.setMarks(markService.getMarksByStudentId(possibleStudent.getId()));
-        }
+        }*/
 
         student.setStudent(possibleStudent);
 
@@ -118,6 +119,15 @@ public class MBStudentProfile {
                     publiProfile.setTeacher(true);
                 }
         }
+    }
+
+    public void signMark(List<MarkVo> smarks) {
+
+        for (MarkVo markVo : smarks) {
+            markVo.setSigned(true);
+            markService.saveMark(markVo);
+        }
+        marks.init();
     }
 
     public MBStudent getStudent() {

@@ -36,7 +36,8 @@
                 <f:event type="postAddToView" listener="#{profileBean.onLoad}" />
                 <h:panelGroup id="panel">
                     <p:dataTable id="students" var="mark"
-                                 value="#{markBean.marks}" rowKey="#{mark.id}"
+                                 value="#{markBean.marks.source}" rowKey="#{mark.id}"
+                                 selection="#{markBean.marks.target}"
                                  style="margin-bottom:0"
                                  rows="20"
                                  paginator="true"
@@ -45,9 +46,11 @@
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="15, 20, 50">
 
+                        <p:column rendered="#{publicProfileBean.parent}" selectionMode="multiple" style="width:36px;text-align:center"/>
+
                         <p:column headerText="#{msg['signed']}" sortBy="#{mark.signed}">
                             <h:selectBooleanCheckbox id="check-box"
-                                                     value="#{mark.signed}" disabled="#{mark.signed or (!publicProfileBean.parent and !mark.signed)}">
+                                                     value="#{mark.signed}" disabled="true">
                                 <f:selectItem itemValue="#{mark.signed}"/>
                             </h:selectBooleanCheckbox>
                         </p:column>
@@ -71,7 +74,12 @@
                             <h:outputText value="#{mark.value}"/>
                         </p:column>
                     </p:dataTable>
+                    <p:commandButton rendered="#{publicProfileBean.parent}" id="sign-note" value="#{msg['sign']}"
+                                                   style="margin-top:5px"
+                                                   update="panel"
+                                                   action="#{profileBean.signMark(markBean.marks.target)}"/>
                 </h:panelGroup>
+
             </h:form>
         </div>
 
