@@ -2,6 +2,7 @@ package hu.inf.unideb.rft.ejournal.web.managedbeans.request;
 
 import hu.inf.unideb.rft.ejournal.service.EmailService;
 import hu.inf.unideb.rft.ejournal.service.UserService;
+import hu.inf.unideb.rft.ejournal.vo.RoleVo;
 import hu.inf.unideb.rft.ejournal.vo.UserVo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +23,7 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @ManagedBean(name="passwordOperations")
@@ -61,7 +63,12 @@ public class MBPasswordOperations {
         emailService.passwordReset(user.getEmail(),user.getPassword(),user.getFirstName(),user.getLastName());
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        List<RoleVo> roles= user.getRoles();
+        user.setRoles(null);
         userService.saveUser(user);
+        for (RoleVo role:roles){
+            userService.addRoleToUser(user.getName(),role);
+        }
         return null;
     }
 
@@ -71,7 +78,7 @@ public class MBPasswordOperations {
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(newpassword));
         emailService.passwordChange(user.getEmail(),newpassword,user.getFirstName(),user.getLastName());
-        userService.saveUser(user);
+
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
