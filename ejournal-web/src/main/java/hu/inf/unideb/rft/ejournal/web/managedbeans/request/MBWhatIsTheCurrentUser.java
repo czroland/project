@@ -62,8 +62,12 @@ public class MBWhatIsTheCurrentUser {
         setStudent();
         setTeacher();
 
-        if (user.getUser().getRoles().contains(Roles.ROLE_PARENT))
-            student.getStudent().setParent(parentService.getParentByUserId(user.getUser().getId()));
+        for (RoleVo roleVo : user.getUser().getRoles()) {
+            if (Roles.ROLE_PARENT.toString().equals(roleVo.getName())) {
+                ParentVo parentVo = parentService.getParentByUserId(user.getUser().getId());
+                student.setStudent(studentService.getStudentByParentId(parentVo.getId()));
+            }
+        }
 
     }
 

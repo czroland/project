@@ -16,6 +16,8 @@ public interface StudentService {
 
     StudentVo getStudentByUserId(Long id);
 
+    StudentVo getStudentByParentId(Long id);
+
     List<StudentVo> getStudentsByClassId(Long id);
 
     StudentVo getStudentByEmail(String email);

@@ -56,6 +56,11 @@ public class StudentServiceImpl extends AbstractMappingService implements Studen
     }
 
     @Override
+    public StudentVo getStudentByParentId(Long id) {
+        return map(studentRepository.findByParentId(id), StudentVo.class);
+    }
+
+    @Override
     public List<StudentVo> getStudentsByClassId(Long id) {
 
         return map(studentRepository.findByAclassId(id), StudentVo.class);

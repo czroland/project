@@ -7,13 +7,14 @@ import hu.inf.unideb.rft.ejournal.vo.MarkVo;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "publicProfileBean")
-@ViewScoped
+@SessionScoped
 public class MBProfile  implements Serializable {
 
     private static final long serialVersionUID = 8080516358512431815L;
