@@ -77,6 +77,12 @@ public class MBPasswordOperations {
         UserVo user = getUserService().getUserByName(uservo.getUsername());
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(newpassword));
+        List<RoleVo> roles= user.getRoles();
+        user.setRoles(null);
+        userService.saveUser(user);
+        for (RoleVo role:roles){
+            userService.addRoleToUser(user.getName(),role);
+        }
         emailService.passwordChange(user.getEmail(),newpassword,user.getFirstName(),user.getLastName());
 
 
